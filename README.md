@@ -9,7 +9,7 @@ Some confs are original creations, others are modifications.
 There is also a script to restart conky regularly to deal with 
 terrible IO ops memory leak.
 
-I use X11 colour names, mostly, for example _Tomato_.
+I use X11 colour names, mostly, for example _Tomato_. 
 
 ---
 
