@@ -1,0 +1,166 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : http://wim66.deviantart.com/art/Processes-Thin-Conky-with-Spotify-533412367
+# Processes-Conky					  #
+# by wim66 https://www.google.com/+WillemO		  #
+# 16-5-2015
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 10
+gap_y 20
+minimum_size 300 1040
+maximum_width 240
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 102
+own_window_argb_visual no
+
+#own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#best for Ubuntu 15.10 Wily
+#own_window_type normal
+#own_window_transparent no
+#own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+color1 DEDEDE
+color2 D64937
+###End Color###
+
+
+own_window_transparent no
+TEXT
+# day/time
+${goto 10}${voffset 5}${font Adele:size=20,weight:normal}${color2}${time %A}${font Adele:size=32,weight:normal}${alignr 10}${time %H:%M}
+#
+# info
+${goto 10}${voffset -25}${font Adele:size=15,weight:normal}${color1}${execi 6000 lsb_release -d | cut -f 2| tr "[:upper:]" "[:upper:]"}$sysname ${font Adele:size=8}${alignr}v3.0.4  
+${goto 10}${font Adele:size=15,weight:normal}${color1}$kernel
+${goto 10}${font Adele:size=15,weight:normal}${color1}Uptime: $uptime${color}
+#
+# cpu load/temp/graph
+${goto 10}${voffset 5}${font Adele:size=15,weight:normal}${color1}CPU 1 : ${color1}${cpu cpu1}%${alignr 10}${color1}${exec sensors|grep 'Core 0'|awk '{print $3}'}
+${goto 10}${voffset -5}${color2}${cpugraph cpu1 40,220 D64937 dedede}
+${goto 10}${voffset 0}${font Adele:size=15,weight:normal}${color1}CPU 2 : ${color1}${cpu cpu2}%${alignr 10}${color1} ${exec sensors|grep 'Core 1'|awk '{print $3}'}
+${goto 10}${voffset -5}${color2}${cpugraph cpu2 40,220 D64937 dedede}
+#
+# top processes
+${voffset -5}${font Adele:size=15,weight:normal}\
+${alignc}${color1}Top Processes
+${voffset 4}${goto 10}${color1}${font Adele:size=13}${top name 1}${alignr 10}${top cpu 1}%
+${goto 10}${color1}${voffset -2}${font Adele:size=13}${top name 2}${alignr 10}${top cpu 2}%
+${goto 10}${voffset -2}${font Adele:size=13}${top name 3}${alignr 10}${top cpu 3}%
+${goto 10}${voffset -2}${font Adele:size=13}${top name 4}${alignr 10}${top cpu 4}%
+#
+# top memory
+${goto 100}${color1}${voffset -3}${font Adele:size=15,weight:normal}Memory
+${goto 10}${color1}${voffset -2}${font Adele:size=13}${top_mem name 1}${alignr 10}${top mem 1}%
+${goto 10}${voffset -2}${top_mem name 2}${alignr 10}${top mem 2}%
+${goto 10}${voffset -2}${top_mem name 3}${alignr 10}${top mem 3}%
+${goto 10}${voffset -2}${top_mem name 4}${alignr 10}${top mem 4}%
+${goto 10}${voffset -2}${color2}${membar 10,180 666666 666666}${goto 100}${color1}${alignr 10}${color1}$memperc%
+#
+#network
+${voffset 10}${goto 10}${font Adele:size=13,weight:normal}${color1}Ethernet${alignr 10}
+${voffset 5}${goto 10}${color1}${font Adele:size=14,weight:normal}Upspeed:$color1${alignr 10}${upspeed wlp2s0}
+${goto 10}${voffset 0}${color1}${font Adele:size=14,weight:normal}Total up:${color1}${alignr 10}${totalup wlp2s0}
+${goto 10}${color2}${upspeedgraph wlp2s0 40,220 D64937 dedede 100 -l}
+${goto 10}${color1}Down:$color1${alignr 10}${downspeed wlp2s0}
+${goto 10}${color1}Total down:$color1${alignr 10}${totaldown wlp2s0}
+${goto 10}${color2}${downspeedgraph wlp2s0 40,220 D64937 dedede 100 -l}
+#
+# weather
+#
+#------> Check Qaisar Nawaz' blog on how to change the weather location code: http://myconkys.blogspot.com.au/2014/04/weather-location-settings.html <-----#
+#
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=12817504&u=c" -o $HOME/.conky/Aurora/2_processes_thin/weather/cache/weather.xml}\
+${font Adele:size=15,weight:normal}${goto 10}${color1}${voffset 0}${execi 300 grep "yweather:location" $HOME/.conky/Aurora/2_processes_thin/weather/cache/weather.xml | grep -o "city=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}, ${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "country=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+
+${font LG Weather_Z:size=35}${goto 10}${voffset -20}${execi 300 grep "yweather:condition" $HOME/.conky/Aurora/2_processes_thin/weather/cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font GeosansLight:normal:size=12}Celsius${font Helvetica Neue LT Com:size=13}
+
+${font GeosansLight:normal:size=12}${goto 30}${voffset -12}${execi 300 grep "yweather:forecast" $HOME/.conky/Aurora/2_processes_thin/weather/cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+
+${goto 85}${voffset -38}${execi 300 grep "yweather:forecast" $HOME/.conky/Aurora/2_processes_thin/weather/cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+
+${execi 300 cp -f $HOME/.conky/Aurora/2_processes_thin/weather/outlineW/$(grep "yweather:condition" $HOME/.conky/Aurora/2_processes_thin/weather/cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png $HOME/.conky/Aurora/2_processes_thin/weather/cache/weather-1.png}${image $HOME/.conky/Aurora/2_processes_thin/weather/cache/weather-1.png -p 140,735 -s 80x80}
+#
+# icons
+#
+${image arrow-up.png -p 10,790 -s 15x15}
+#
+${image arrow-down.png -p 65,790 -s 15x15}
+#
+${if_running spotify}
+${voffset -90}
+#
+# circle album art #
+${execi 8 $HOME/.conky/Aurora/2_processes_thin/spotify/cover_xl.sh}${execi 8 $HOME/.conky/Aurora/2_processes_thin/spotify/sphere.sh}${image ~/.conky/Aurora/2_processes_thin/spotify/lastpic_xl_conv.png -p 45,810 -s 140x140 -f 2}
+#
+# or square album art #
+#${execi 8 $HOME/.conky/Aurora/2_processes_thin/spotify/cover_xl.sh}${image ~/.conky/Aurora/2_processes_thin/spotify/lastpic_xl -p 45,845 -s 140x140 -f 2}
+#
+${voffset 140}
+${goto 10}${font Adele:size=15,weight:normal}${color1}${execi 5 echo `dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 2 "artist"|egrep -v "artist"|egrep -v "array"|cut -b 27-|cut -d '"' -f 1|egrep -v ^$`}
+${goto 10}${font Adele:size=15,weight:norma}${color1}${execi 5 echo `dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 1 "title"|egrep -v "title"|cut -b 44-|cut -d '"' -f 1|egrep -v ^$`}
+${else}${image peace.png -p 35,845 -s 160x160${endif}

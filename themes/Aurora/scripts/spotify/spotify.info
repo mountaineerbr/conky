@@ -1,0 +1,55 @@
+{
+  "album" : {
+    "album_type" : "single",
+    "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SI", "SK", "SV", "TR", "TW", "US", "UY" ],
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/album/66tLJH66R3m6wqRuAnko2I"
+    },
+    "href" : "https://api.spotify.com/v1/albums/66tLJH66R3m6wqRuAnko2I",
+    "id" : "66tLJH66R3m6wqRuAnko2I",
+    "images" : [ {
+      "height" : 640,
+      "url" : "https://i.scdn.co/image/1d865d5522065451c0f7acf47a2c10857e10c3a4",
+      "width" : 640
+    }, {
+      "height" : 300,
+      "url" : "https://i.scdn.co/image/68ee6660b1844341f872faf4f0d6e5a557197584",
+      "width" : 300
+    }, {
+      "height" : 64,
+      "url" : "https://i.scdn.co/image/6ff6811b23b4aeb34cf9e0ab02d8e9df027714dd",
+      "width" : 64
+    } ],
+    "name" : "Forever",
+    "type" : "album",
+    "uri" : "spotify:album:66tLJH66R3m6wqRuAnko2I"
+  },
+  "artists" : [ {
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/artist/1iplPnyLRyqUO59CmJCZWX"
+    },
+    "href" : "https://api.spotify.com/v1/artists/1iplPnyLRyqUO59CmJCZWX",
+    "id" : "1iplPnyLRyqUO59CmJCZWX",
+    "name" : "Adam L. Kid",
+    "type" : "artist",
+    "uri" : "spotify:artist:1iplPnyLRyqUO59CmJCZWX"
+  } ],
+  "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SI", "SK", "SV", "TR", "TW", "US", "UY" ],
+  "disc_number" : 1,
+  "duration_ms" : 241899,
+  "explicit" : false,
+  "external_ids" : {
+    "isrc" : "TCABQ1345315"
+  },
+  "external_urls" : {
+    "spotify" : "https://open.spotify.com/track/1v7zNzoGN5b8tRr6zrFcW3"
+  },
+  "href" : "https://api.spotify.com/v1/tracks/1v7zNzoGN5b8tRr6zrFcW3",
+  "id" : "1v7zNzoGN5b8tRr6zrFcW3",
+  "name" : "Forever",
+  "popularity" : 35,
+  "preview_url" : "https://p.scdn.co/mp3-preview/c792b1775b865f01e6f3058ca6954d695de2a809",
+  "track_number" : 1,
+  "type" : "track",
+  "uri" : "spotify:track:1v7zNzoGN5b8tRr6zrFcW3"
+}

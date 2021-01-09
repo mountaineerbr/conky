@@ -1,0 +1,160 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 20
+gap_y 40
+minimum_size 300 740
+maximum_width 300
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 102
+own_window_argb_visual yes
+
+#own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent no
+#own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+#Red#
+color7 FF0000
+###End Color###
+
+###Loading lua script###
+###Choose the correct file according to the number of your cores###
+#lua_load ./lua/seamod_rings_cpu_start.lua
+#lua_load ./lua/seamod_rings_cpu_2core_hc_white.lua
+#lua_load ./lua/seamod_rings_cpu_4core_hc_white.lua
+#lua_load ./lua/seamod_rings_cpu_8core_hc_white.lua
+#lua_load ./lua/seamod_rings_original_seajey.lua
+#lua_load ./lua/white_eye.lua
+lua_load ./lua/white_eye_duo_core.lua
+#lua_load ./lua/white_eye_quad_core.lua
+#lua_load ./lua/white_eye_octa_core.lua
+lua_draw_hook_pre main
+###End Loading Lua###
+
+#hour=3600
+#day=86400
+
+TEXT
+${font Ubuntu:size=12,weight:bold}${color4}GENERAL${font Ubuntu:size=7,weight:bold}${voffset -8}${alignr}v3.0.4  ${font Ubuntu:size=12,weight:bold}${color0}${font ConkyColors:size=12}E          
+${hr 2}
+#{font Ubuntu:size=12,weight:bold}${color5}${execi 6000 lsb_release -irc | grep 'Distributor'|awk {'print $3'}} ${execi 6000 lsb_release -irc | grep 'Release'|awk {'print $2'}} ${execi 6000 lsb_release -irc | grep 'Codename'|awk {'print $2'}}
+${font Ubuntu:size=12,weight:bold}${color6}${execi 6000 cat /etc/issue.net}
+${voffset -5}${color5}${font Ubuntu:size=8,weight:italic}$sysname $kernel on $machine
+${font Ubuntu:size=12,weight:bold}${color4}Uptime ${alignr}${color}$uptime
+${font Ubuntu:size=12,weight:bold}${color4}Cpu Temp ${alignr}${color}${execi 10 sensors | grep 'Core 0' | awk {'print $3'}}
+${color4}Cpu Freq ${alignr}${color}${freq_g} Ghz
+#check sensors conky widget to see your sensor names and change these here
+${color4}MB Temp ${alignr}${color}${execi 10 sensors | grep 'MB Temperature' | awk {'print $3'}}
+#ALT 1 : ${color4}MB Temp ${alignr}${color}${execi 10 sensors | grep 'temp1' | awk {'print $2'}}
+${color4}Cpu Fan ${alignr}${color}${execi 10 sensors | grep 'CPU FAN' | awk {'print $4$5'}}
+${color4}Power Fan ${alignr}${color}${execi 10 sensors | grep 'POWER FAN Speed' | awk {'print $4$5'}}
+${color4}Motherboard ${alignr}${color}${execi 6000 dmidecode |grep -n2 Base |grep Produ |awk {'print $4'}}
+# this works too sudo dmidecode -s system-product-name
+${color4}Manufacturer ${alignr}${color}${execi 6000 dmidecode |grep -n2 Base |grep Manu |awk {'print $3'}}
+${color4}${cpubar cpu0 10,150}${color4} Cpu ${alignr}${if_match ${cpu cpu0} > 30}${color7}${else}${if_match ${cpu cpu0} > 15}${color4}${else}${color}${endif}${endif}${cpu cpu0}%
+${if_existing /proc/acpi/battery/BAT0/info}${if_match ${battery_percent BAT0} <= 20}${color7}${battery_bar 10,150 BAT0} Battery${alignr}${color7}${battery_percent BAT0}%${else}${color4}${battery_bar 10,150 BAT0} Battery${alignr}${color}${battery_percent BAT0}%${endif}${else}${voffset -20}${endif}
+${color4}${membar 10,150} Mem ${alignr}${if_match ${memperc} > 50}${color6}${else}${color}${endif}${memperc}%
+${color4}Total Processes${alignr}${color}${processes}
+${color4}Running processes${color}${goto 300}${running_processes}
+${color4}Load${alignr}${color0}${loadavg}
+${color4}Packages Upgrades${alignr}${if_match ${execi 3600 aptitude search "~U" | wc -l | tail}  > 0}${color6}${else }${color}${endif}${execi 3600 aptitude search "~U" | wc -l | tail} 
+${font Ubuntu:size=12,weight:bold}${color4}CPU   
+${font Ubuntu:size=8,weight:italic}${color5}${execi 6000 cat /proc/cpuinfo | grep -i 'Model name' -m 1 | cut -c14-}
+${color4}${hr 2}
+# Showing TOP 5 CPU-consumers
+${offset 50}${font Ubuntu:size=12,weight:bold}${color4}${top name 1}${alignr}${top cpu 1}%
+${offset 50}${font Ubuntu:size=12,weight:bold}${color4}${top name 2}${alignr}${top cpu 2}%
+${offset 50}${font Ubuntu:size=12,weight:regular}${color1}${top name 3}${alignr}${top cpu 3}%
+${offset 50}${font Ubuntu:size=12,weight:normal}${color1}${top name 4}${alignr}${top cpu 4}%
+${offset 50}${font Ubuntu:size=12,weight:normal}${color2}${top name 5}${alignr}${top cpu 5}%
+${offset 50}${font Ubuntu:size=12,weight:normal}${color2}${top name 6}${alignr}${top cpu 6}%
+
+
+
+
+
+
+
+
+
+
+
+${font Ubuntu:size=12,weight:bold}${color5}CPU Usage over Time
+${color}${cpugraph 40,300 77B753 EF5A29 -t}

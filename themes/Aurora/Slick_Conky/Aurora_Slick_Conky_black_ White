@@ -1,0 +1,142 @@
+#=====================================================================================
+#                               aurora
+# Date    : 04/04/2015
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v2.9.1
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : http://speedracker.deviantart.com/art/Slick-Conky-With-Spotify-524408146
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 0
+gap_y 20
+minimum_size 4270 270
+maximum_width 1000
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 0
+own_window_argb_visual yes
+
+#own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+#own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+###End Color###
+
+###Loading lua script###
+lua_load txtc.lua
+lua_draw_hook_post draw_text1
+###End Loading Lua###
+
+
+TEXT
+${voffset 82}${offset 50}${font LG Weather_Z:size=75}${time %I:%M}Aliquam
+${voffset -135}${offset 305}${font Aliquam:bold:size=20}${time %A, %d }
+${voffset }${offset 315}${font Aliquam:bold:size=23}${time %B }
+
+# --- Weather --- #
+###################
+\
+# --- WOEID (Location id) --- #
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=1103816&u=c" -o ~/.cache/weather.xml}\
+# --- Temperature --- #
+#######################
+\
+${font LG Weather_Z:size=35}${offset 500}${voffset -100}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font GeosansLight:bold:size=9}Celsius${font Helvetica Neue LT Com:size=13}
+
+${font LG Weather_Z:bold:size=12}${offset 520}${voffset -10}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+
+${offset 575}${voffset -30}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+
+# --- Icon - high temperature --- #
+###################################
+\
+${image arrow-up.png -p 505,154 -s 10x10}
+
+# --- Icon - low temperature icon --- #
+#######################################
+\
+${image arrow-down.png -p 560,154 -s 10x10}
+
+# --- Location name (city and country) --- #
+############################################
+\
+${font Aliquam:bold:size=11}${offset 505}${voffset -163}${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "city=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}, ${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "country=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+
+###Systems
+${voffset -33}${offset 680}${font Aliquam:bold:size=11}$nodename
+${voffset 2}${offset 680}Cpu: ${cpu cpu1}%
+${voffset 2}${offset 680}Ram: $memperc%
+${voffset 2}${offset 680}Temp: ${hwmon 0 temp 1} 'c
+${voffset 2}${offset 680}Wifi: ${wireless_link_qual wlan0}%${font Aliquam:bold:size=9}
+
+##Spotifty
+${voffset -95}${offset 840}${execi 3 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 1 "title"|egrep -v "title"|cut -b 44-|cut -d '"' -f 1|egrep -v ^$ }
+${offset 840}${voffset 12}${execi 3 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 2 "artist"|egrep -v "artist"|egrep -v "array"|cut -b 27-|cut -d '"' -f 1|egrep -v ^$ }
+${offset 840}${voffset 12}${execi 3 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 1 "album"|egrep -v "album"|cut -b 44-|cut -d '"' -f 1|egrep -v ^$ }${color 57BEEB}
+
+
+
+
+
+
+

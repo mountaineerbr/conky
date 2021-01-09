@@ -1,0 +1,12 @@
+tcp        0      0 192.168.0.110:35386     74.125.133.188:5228     ESTABLISHED 2954/chrome     
+tcp        0      0 192.168.0.110:49618     194.132.198.182:4070    ESTABLISHED 3637/spotify    
+tcp        0      0 192.168.0.110:58549     64.235.151.18:443       ESTABLISHED 2567/CopyAgent  
+tcp        0      0 192.168.0.110:34508     216.137.59.253:80       ESTABLISHED 3717/gvfsd-http 
+tcp        0      0 192.168.0.110:42529     173.194.113.86:443      ESTABLISHED 2954/chrome     
+tcp        0      0 192.168.0.110:42437     192.241.181.153:443     ESTABLISHED 2954/chrome     
+tcp        0      0 192.168.0.110:59597     46.33.74.81:80          ESTABLISHED 3637/spotify    
+tcp        0      0 192.168.0.110:52093     64.235.151.30:443       ESTABLISHED 2567/CopyAgent  
+tcp        0      0 192.168.0.110:36308     46.33.74.98:80          ESTABLISHED 3637/spotify    
+tcp        0      0 192.168.0.110:34605     108.160.167.39:80       ESTABLISHED 2593/dropbox    
+tcp6       0      0 ::1:631                 ::1:39796               ESTABLISHED -               
+tcp6       0      0 ::1:39796               ::1:631                 ESTABLISHED 2282/cinnamon-setti

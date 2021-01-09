@@ -1,0 +1,8 @@
+#!/bin/bash
+# use this nifty little code to change the colors to your liking
+# http://imagemagick.org/script/color.php
+# http://www.imagemagick.org/Usage/color_basics/#replace
+for i in {0..48} 
+do
+	convert $i.png -fuzz 40%  -fill IndianRed2 -opaque white  $i.png
+done

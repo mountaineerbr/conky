@@ -1,0 +1,194 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#======================================================================================
+
+background yes
+update_interval 1
+
+cpu_avg_samples 1
+net_avg_samples 2
+temperature_unit celsius
+
+double_buffer yes
+no_buffers yes
+text_buffer_size 2048
+border_inner_margin 0
+border_outer_margin 10
+alignment top_left
+
+gap_x 490
+gap_y 40
+minimum_size 290 980
+maximum_width 850
+
+own_window yes
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent no
+own_window_argb_visual yes
+own_window_colour 000000
+own_window_argb_value 102
+#If you want to have a 'real' window to move around and change in size
+#make the following line a comment by putting a pound sign
+# then the the window title will show up
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+own_window_title WunderGround.com Forecast
+
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+
+override_utf8_locale yes
+use_xft yes
+xftfont ubuntu:size=10
+xftalpha 0.9
+uppercase no
+
+# Defining colors
+default_color FFFFFF
+# Shades of Gray
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+# Orange
+color4 EF5A29
+# Green
+color5 77B753
+# Light Orange
+color6 FFA300
+
+TEXT
+${font Ubuntu:size=14,weight:bold}${color4}FORECAST 10 DAYS${font Ubuntu:size=10,weight:bold}${color0}${font ConkyColors:size=14}${alignr}y ${font}
+${hr 2}
+${execi 1200 $HOME/.conky/Aurora/wunderground/wg.sh}
+${font Ubuntu:size=10,weight:bold}${color5}
+${image $HOME/.conky/Aurora/wunderground/cache/Now.png -p 5,60 -s 108x65}\
+${voffset -20}${alignr}${color}${execi 1200  sed -n '6p' $HOME/.conky/Aurora/wunderground/Moon_Sun}${color}
+${goto 125}${time %d %b %Y}${image $HOME/.conky/Aurora/wunderground/cache/Moon_phase.png -p 250,80 -s 30x30}
+	${goto 125}${color1}${execi 1200  sed -n '67p' $HOME/.conky/Aurora/wunderground/Conditions}°${color}\
+	${goto 180}${color2}± ${execi 1200  sed -n '113p' $HOME/.conky/Aurora/wunderground/Conditions}°${color} 
+${goto 125}${color9}${execi 1200  sed -n '39p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+	${goto 180}${color7}${execi 1200  sed -n '44p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}
+${goto 125}Rain ${execi 1200  sed -n '133p' $HOME/.conky/Aurora/wunderground/Conditions}mm
+${font Ubuntu:size=14,weight:bold}${color5}${execi 1200  sed -n '63p' $HOME/.conky/Aurora/wunderground/Conditions}${color}${font}
+Visibility  ${execi 1200  sed -n '117p' $HOME/.conky/Aurora/wunderground/Conditions}km\
+	${goto 160}Rain  ${execi 1200  sed -n '133p' $HOME/.conky/Aurora/wunderground/Conditions}mm
+Wind          ${execi 1200  sed -n '81p' $HOME/.conky/Aurora/wunderground/Conditions}\
+	${goto 160}${execi 1200  sed -n '73p' $HOME/.conky/Aurora/wunderground/Conditions}\
+	${goto 200}${execi 1200  sed -n '75p' $HOME/.conky/Aurora/wunderground/Conditions}°
+Pressure    ${execi 1200  sed -n '85p' $HOME/.conky/Aurora/wunderground/Conditions} | ${execi 1200  sed -n '89p' $HOME/.conky/Aurora/wunderground/Conditions}\
+	${goto 160}UVI  ${execi 1200  sed -n '121p' $HOME/.conky/Aurora/wunderground/Conditions}
+Dew Pt.     ${execi 1200  sed -n '95p' $HOME/.conky/Aurora/wunderground/Conditions}°\
+	${goto 160}Hum  ${execi 1200  sed -n '69p' $HOME/.conky/Aurora/wunderground/Conditions}
+Sunrise      ${color8}${execi 1200  sed -n '16p' $HOME/.conky/Aurora/wunderground/Moon_Sun}:${execi 1200  sed -n '18p' $HOME/.conky/Aurora/wunderground/Moon_Sun} \
+${goto 160}${color}Sunset: ${color1}${execi 1200  sed -n '21p' $HOME/.conky/Aurora/wunderground/Moon_Sun}:${execi 1200  sed -n '23p' $HOME/.conky/Aurora/wunderground/Moon_Sun}${color}
+${alignc}${color4}${membar 0,40} ${execi 1200 echo `date --date="1 day" | awk '{print $1" "$3" "$2" "$6}'`} ${membar 0,40}${color}
+${color9}${execi 1200  sed -n '145p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+	${goto 105}Wind ${execi 1200  sed -n '202p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}k\
+	${goto 177}${execi 1200  sed -n '204p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}\
+	${goto 214}${execi 1200  sed -n '206p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}
+	${image $HOME/.conky/Aurora/wunderground/cache/d2.png -p 30,265 -s 66x40}\
+	${goto 105}Hum ${execi 1200  sed -n '210p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}%\
+	${goto 177}QPF ${execi 1200  sed -n '163p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}mm
+${color7}${execi 1200  sed -n '150p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+	${goto 105}Year Day${goto 177}${execi 1200  sed -n '118p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}
+${font Ubuntu:size=14,weight:bold}${color5}${alignc}${execi 1200  sed -n '152p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}${color}${font}
+${alignc}${color4}${membar 0,40} ${execi 1200 echo `date --date="2 day" | awk '{print $1" "$3" "$2" "$6}'`} ${membar 0,40}${color}
+${color9}${execi 1200  sed -n '251p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+	${goto 105}Wind ${execi 1200  sed -n '299p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}k\
+	${goto 177}${execi 1200  sed -n '301p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}\
+	${goto 214}${execi 1200  sed -n '303p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}
+	${image $HOME/.conky/Aurora/wunderground/cache/d3.png -p 30,345 -s 66x40}\
+	${goto 105}Hum ${execi 1200  sed -n '316p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}%\
+	${goto 177}QPF ${execi 1200  sed -n '269p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}mm
+${color7}${execi 1200  sed -n '256p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+${font Ubuntu:size=14,weight:bold}${color5}${alignc}${execi 1200  sed -n '258p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}${color}${font}
+${alignc}${color4}${membar 0,40} ${execi 1200 echo `date --date="3 day" | awk '{print $1" "$3" "$2" "$6}'`} ${membar 0,40}${color}
+${color9}${execi 1200  sed -n '357p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+	${goto 105}Wind ${execi 1200  sed -n '405p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}k\
+	${goto 177}${execi 1200  sed -n '407p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}\
+	${goto 214}${execi 1200  sed -n '409p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}
+	${image $HOME/.conky/Aurora/wunderground/cache/d4.png -p 30,415 -s 66x40}\
+	${goto 105}Hum ${execi 1200  sed -n '422p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}%\
+	${goto 177}QPF ${execi 1200  sed -n '375p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}mm
+${color7}${execi 1200  sed -n '362p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+${font Ubuntu:size=14,weight:bold}${color5}${alignc}${execi 1200  sed -n '364p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}${color}${font}
+${alignc}${color4}${membar 0,40} ${execi 1200 echo `date --date="4 day" | awk '{print $1" "$3" "$2" "$6}'`} ${membar 0,40}${color}
+${color9}${execi 1200  sed -n '463p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+	${goto 105}Wind ${execi 1200  sed -n '511p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}k\
+	${goto 177}${execi 1200  sed -n '513p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}\
+	${goto 214}${execi 1200  sed -n '515p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}
+	${image $HOME/.conky/Aurora/wunderground/cache/d5.png -p 30,480 -s 66x40}\
+	${goto 105}Hum ${execi 1200  sed -n '528p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}%\
+	${goto 177}QPF ${execi 1200  sed -n '481p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}mm
+${color7}${execi 1200  sed -n '468p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+${font Ubuntu:size=14,weight:bold}${color5}${alignc}${execi 1200  sed -n '470p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}${color}${font}
+${alignc}${color4}${membar 0,40} ${execi 1200 echo `date --date="5 day" | awk '{print $1" "$3" "$2" "$6}'`} ${membar 0,40}${color}
+${color9}${execi 1200  sed -n '569p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+	${goto 105}Wind ${execi 1200  sed -n '617p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}k\
+	${goto 177}${execi 1200  sed -n '619p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}\
+	${goto 214}${execi 1200  sed -n '621p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}
+	${image $HOME/.conky/Aurora/wunderground/cache/d6.png -p 30,550 -s 66x40}\
+	${goto 105}Hum ${execi 1200  sed -n '634p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}%\
+	${goto 177}QPF ${execi 1200  sed -n '587p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}mm
+${color7}${execi 1200  sed -n '574p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+${font Ubuntu:size=14,weight:bold}${color5}${alignc}${execi 1200  sed -n '576p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}${color}${font}
+${alignc}${color4}${membar 0,40} ${execi 1200 echo `date --date="6 day" | awk '{print $1" "$3" "$2" "$6}'`} ${membar 0,40}${color}
+${color9}${execi 1200  sed -n '675p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+	${goto 105}Wind ${execi 1200  sed -n '723p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}k\
+	${goto 177}${execi 1200  sed -n '725p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}\
+	${goto 214}${execi 1200  sed -n '727p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}
+	${image $HOME/.conky/Aurora/wunderground/cache/d7.png -p 30,620 -s 66x40}\
+	${goto 105}Hum ${execi 1200  sed -n '740p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}%\
+	${goto 177}QPF ${execi 1200  sed -n '693p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}mm
+${color7}${execi 1200  sed -n '680p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+${font Ubuntu:size=14,weight:bold}${color5}${alignc}${execi 1200  sed -n '682p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}${color}${font}
+${alignc}${color4}${membar 0,40} ${execi 1200 echo `date --date="7 day" | awk '{print $1" "$3" "$2" "$6}'`} ${membar 0,40}${color}
+${color9}${execi 1200  sed -n '781p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+	${goto 105}Wind ${execi 1200  sed -n '829p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}k\
+	${goto 177}${execi 1200  sed -n '831p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}\
+	${goto 214}${execi 1200  sed -n '833p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}
+	${image $HOME/.conky/Aurora/wunderground/cache/d8.png -p 30,690 -s 66x40}\
+	${goto 105}Hum ${execi 1200  sed -n '846p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}%\
+	${goto 177}QPF ${execi 1200  sed -n '799p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}mm
+${color7}${execi 1200  sed -n '786p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+${font Ubuntu:size=14,weight:bold}${color5}${alignc}${execi 1200  sed -n '788p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}${color}${font}
+${alignc}${color4}${membar 0,40} ${execi 1200 echo `date --date="8 day" | awk '{print $1" "$3" "$2" "$6}'`} ${membar 0,40}${color}
+${color9}${execi 1200  sed -n '887p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+	${goto 105}Wind ${execi 1200  sed -n '935p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}k\
+	${goto 177}${execi 1200  sed -n '937p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}\
+	${goto 214}${execi 1200  sed -n '939p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}
+	${image $HOME/.conky/Aurora/wunderground/cache/d9.png -p 30,750 -s 66x40}\
+	${goto 105}Hum ${execi 1200  sed -n '952p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}%\
+	${goto 177}QPF ${execi 1200  sed -n '905p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}mm
+${color7}${execi 1200  sed -n '892p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+${font Ubuntu:size=14,weight:bold}${color5}${alignc}${execi 1200  sed -n '894p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}${color}${font}
+${alignc}${color4}${membar 0,40} ${execi 1200 echo `date --date="9 day" | awk '{print $1" "$3" "$2" "$6}'`} ${membar 0,40}${color}
+${color9}${execi 1200  sed -n '993p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+	${goto 105}Wind ${execi 1200  sed -n '1041p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}k\
+	${goto 177}${execi 1200  sed -n '1043p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}\
+	${goto 214}${execi 1200  sed -n '1054p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}
+	${image $HOME/.conky/Aurora/wunderground/cache/d10.png -p 30,820 -s 66x40}\
+	${goto 105}Hum ${execi 1200  sed -n '1058p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}%\
+	${goto 177}QPF ${execi 1200  sed -n '1011p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}mm
+${color7}${execi 1200  sed -n '998p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°${color}\
+${font Ubuntu:size=14,weight:bold}${color5}${alignc}${execi 1200  sed -n '1000p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}${color}${font}
+${alignc}${membar 0,200}
+${alignc}${execi 1200  sed -n '30p' $HOME/.conky/Aurora/wunderground/Conditions}
+${alignc}${execi 1200  sed -n '53p' $HOME/.conky/Aurora/wunderground/Conditions}

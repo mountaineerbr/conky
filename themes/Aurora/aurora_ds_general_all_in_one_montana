@@ -1,0 +1,140 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 20
+gap_y 20
+minimum_size 300 1000
+maximum_width 300
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual no
+own_window_argb_value 242
+own_window_class systemConky
+own_window_colour 333939
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Source Code Pro14.10 Utopic
+#own_window_type normal
+own_window_transparent no
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont Source Code Pro:size=11
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_outline_color 000000
+default_shade_color 000000
+default_color D9D2DA
+color1 B6B6B6
+#light yellow#
+color5 C8373E
+#Mint green#
+color6 88C946
+#signal colors#
+#Orange
+color8 FFA300
+#Red#
+color9 CE0000
+###End Color###
+
+###Loading lua script###
+
+###End Loading Lua###
+
+#hour=3600
+#day=86400
+
+TEXT
+${font Droidlogo:size=16}${color D5362A}${execi 6000 cat /etc/issue.net}${font Source Code Pro:size=8}${voffset}${alignr}v3.0.4
+${color4}${hr 2}
+${font Source Code Pro:size=11,weight}${color4}Uptime ${alignr}${color}$uptime
+${font Source Code Pro:size=11}${color4}Cpu Temp ${alignr}${color}${execi 60 sensors | grep 'Core 0' | awk {'print $3'}}
+#check sensors conky widget to see your sensor names and change these here
+${offset 10}${color4}${cpubar cpu0 10,150}${color4} Cpu ${alignr}${if_match ${cpu cpu0} > 30}${color9}${else}${if_match ${cpu cpu0} > 15}${color8}${else}${color}${endif}${endif}${cpu cpu0}%
+${offset 10}${color4}${membar 10,150} Mem ${alignr}${if_match ${memperc} > 50}${color8}${else}${color}${endif}${memperc}%
+${font Source Code Pro Regular:size=11}${color5}CPU Usage over Time
+${color4}${cpugraph 40,300 D5362A FFC900  -t }
+# Network data (my desktop have only LAN). ETHERNET ring is mostly useless but looks pretty, main info is in the graphs
+${if_existing /proc/net/route eth0}${font Source Code Pro Regular:size=11}${color5}Ethernet
+${offset 10}${font Source Code Pro:size=11}${color4}Total up${alignr}${color}${totalup eth0}
+${offset 10}${color4}Total down${alignr}${color}${totaldown eth0}
+${offset 10}${color4}${font Source Code Pro:size=11}Upload speed ${alignr}${font Source Code Pro:size=11}${color}${upspeed eth0}
+${color4}${upspeedgraph eth0 40,300 D5362A FFC900 10000000 -l -t}
+${offset 10}${color4}${font Source Code Pro:size=11}Download speed ${alignr}${font Source Code Pro:size=11}${color}${downspeed eth0}
+${color4}${downspeedgraph eth0 40,300 D5362A FFC900 10000000 -l -t}
+${else}${font Source Code Pro Regular:size=11}${color5}Wireless
+${offset 10}${color4}Total up${alignr}${color}${totalup eth0}
+${offset 10}${color4}Total down${alignr}${color}${totaldown eth0}
+${offset 10}${upspeedgraph eth0 40,300 D5362A FFC900 10000000 -l -t}
+${offset 10}${color4}${font Source Code Pro:size=11}Download speed ${alignr}${font Source Code Pro:size=11}${color}${downspeed eth0}
+${offset 10}${downspeedgraph eth0 40,300 D5362A FFC900 10000000 -l -t}${endif}\
+${color5}${font Source Code Pro Regular:size=11}Disks
+${offset 10}${font Source Code Pro:size=11}${color4}Root    ${font Source Code Pro:size=9}${color5}${goto 120}[${fs_size /}]
+${offset 10}${if_match ${fs_used_perc /} > 80}${color9}${else}${color4}${endif}${fs_bar 10,150 /}${goto 180}${fs_used_perc /}%${color4}${alignr}Free: ${color0}${alignr}${fs_free /}
+${font Source Code Pro:size=11}${offset 10}${color4}Home    ${font Source Code Pro:size=9}${color5}${goto 120}[${fs_size /home}]
+${offset 10}${if_match ${fs_used_perc /home} > 80}${color9}${else}${color4}${endif}${fs_bar 10,150 /home}${goto 180}${fs_used_perc /home}%${alignr}${color4}Free: ${color}${alignr}${fs_free /home}
+${color4}${diskiograph_write 40,300 324D23 8FFC900 100000 -t }
+${font Source Code Pro Regular:size=11}${color5}${execi 6000  nvidia-smi --query-supported-clocks=gpu_name --format=csv,noheader}
+${offset 10}${color4}${font Source Code Pro:size=11}GPU Temp ${alignr}${color}${execi 60 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader}°C
+${offset 10}${color4}${font Source Code Pro:size=11}Fan Speed ${alignr}${color}${execi 60 nvidia-settings -q [fan:0]/GPUCurrentFanSpeed -t} %
+${offset 10}${color4}${font Source Code Pro:size=11}Mem Used ${alignr}${color}${execi 60 nvidia-settings -q [gpu:0]/UsedDedicatedGPUMemory -t} / ${execi 6000 nvidia-settings -q [gpu:0]/TotalDedicatedGPUMemory -t} MiB
+${if_running spotify}
+${offset 10}${color4}${font Source Code Pro:size=11}${execi 5 echo `dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 2 "artist"|egrep -v "artist"|egrep -v "array"|cut -b 27-|cut -d '"' -f 1|egrep -v ^$`}
+${offset 10}${color4}${font Source Code Pro:size=11}${execi 5 echo `dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 1 "title"|egrep -v "title"|cut -b 44-|cut -d '"' -f 1|egrep -v ^$`}
+${execi 5 $HOME/.conky/Aurora/scripts/spotify-api/cover_xl.sh}
+${image ~/.conky/Aurora/scripts/spotify-api/lastpic_xl -p 000,700 -s 300x300 -f 2}
+${else}${voffset 50}${goto 50}${font lato bold:size=14}${color FFFFFF}${image ~/.conky/Aurora/scripts/spotify-api/lastpic_xl -p 000,700 -s 300x300 -f 2}${endif}

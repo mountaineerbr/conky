@@ -1,0 +1,15 @@
+tcp   0  0  0.0.0.0:139     0.0.0.0:*  LISTEN  -
+tcp   0  0  127.0.0.1:4371  0.0.0.0:*  LISTEN  3637/spotify
+tcp   0  0  0.0.0.0:57621   0.0.0.0:*  LISTEN  3637/spotify
+tcp   0  0  127.0.1.1:53    0.0.0.0:*  LISTEN  -
+tcp   0  0  127.0.0.1:631   0.0.0.0:*  LISTEN  -
+tcp   0  0  0.0.0.0:17500   0.0.0.0:*  LISTEN  2593/dropbox
+tcp   0  0  127.0.0.1:4381  0.0.0.0:*  LISTEN  3637/spotify
+tcp   0  0  0.0.0.0:8445    0.0.0.0:*  LISTEN  2567/CopyAgent
+tcp   0  0  0.0.0.0:445     0.0.0.0:*  LISTEN  -
+tcp   0  0  127.0.0.1:8099  0.0.0.0:*  LISTEN  3637/spotify
+tcp   0  0  0.0.0.0:902     0.0.0.0:*  LISTEN  -
+tcp6  0  0  :::139          :::*       LISTEN  -
+tcp6  0  0  ::1:631         :::*       LISTEN  -
+tcp6  0  0  :::445          :::*       LISTEN  -
+tcp6  0  0  :::902          :::*       LISTEN  -

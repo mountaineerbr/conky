@@ -1,0 +1,105 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 810
+gap_y 40
+minimum_size 850 980
+maximum_width 850
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual yes
+own_window_argb_value 102
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent no
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=10
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+###End Color###
+
+TEXT
+#${if_existing /proc/acpi/battery/BAT0/info}\
+${if_match ${battery_percent BAT0} => 80}${image ~/.conky/Aurora/images/battery/battery_green.png}\
+${else}${if_match ${battery_percent BAT0} => 60}${image ~/.conky/Aurora/images/battery/battery_light_green.png}\
+${else}${if_match ${battery_percent BAT0} => 40}${image ~/.conky/Aurora/images/battery/battery_yellow.png}\
+${else}${if_match ${battery_percent BAT0} => 20}${image ~/.conky/Aurora/images/battery/battery_orange.png}\
+${else}${image ~/.conky/Aurora/images/battery/battery_red.png}${endif}
+
+${if_existing /proc/acpi/battery/BAT0/info}dd${else}No battery present${endif}
+
+#${image ~/.conky/Aurora/images/battery/battery_green.png -s 20x20}
+
+Will test this on laptop later this week

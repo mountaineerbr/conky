@@ -1,0 +1,13 @@
+#==============================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#=============================================================================
+~/.conky/Aurora/aurora_ds_rings_lover_red_black
+~/.conky/Aurora/aurora_ds_spotify_smooth_xl
+~/.conky/Aurora/wallpaper/BluDarkish_Wallpaper_by_Xternal_HD.jpg
+wallpaper-scaling:stretched

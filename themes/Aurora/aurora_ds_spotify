@@ -1,0 +1,105 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#===================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 10
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 10
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 1010
+gap_y 570
+minimum_size 630 230
+maximum_width 630
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual yes
+own_window_argb_value 102
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent no
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+###End Color###
+
+TEXT
+${alignr}${color0}${font ConkyColors:size=12,weight:normal}G  
+${if_running spotify}#
+${offset 20}${font Ubuntu:size=12,weight:bold}${color}Title ${alignr}${color4}${execi 6 $HOME/.conky/Aurora/scripts/spotify/spotify_info_title.sh}
+${offset 20}${color}Artist ${alignr}${color4}${execi 6 ~/.conky/Aurora/scripts/spotify/spotify_info_artist.sh}${color}
+${offset 20}${color}Album ${alignr}${color4}${execi 6 ~/.conky/Aurora/scripts/spotify/spotify_info_album.sh}${color}
+${execi 6 ~/.conky/Aurora/scripts/spotify/spotify_album_cover.sh}
+${image ~/.conky/Aurora/scripts/spotify/last_album_pic.png -p 530,130 -s 87x87  -f 5}
+${goto 100}${color5}${font ubuntu:size=30,weight:bold}Spotify: ${color2}Playing
+${else}${color5}${font ubuntu:size=36,weight:bold}Spotify: ${color2}Off
+${image ~/.conky/Aurora/images/spotify.png -p 530,130 -s 87x87}
+${endif}

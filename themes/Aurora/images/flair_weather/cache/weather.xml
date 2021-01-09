@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+		<rss version="2.0" xmlns:yweather="http://xml.weather.yahoo.com/ns/rss/1.0" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
+			<channel>
+		
+<title>Yahoo! Weather - Antwerp, BE</title>
+<link>http://us.rd.yahoo.com/dailynews/rss/weather/Antwerp__BE/*http://weather.yahoo.com/forecast/BEXX0003_c.html</link>
+<description>Yahoo! Weather for Antwerp, BE</description>
+<language>en-us</language>
+<lastBuildDate>Tue, 09 Feb 2016 3:50 pm CET</lastBuildDate>
+<ttl>60</ttl>
+<yweather:location city="Antwerp" region=""   country="Belgium"/>
+<yweather:units temperature="C" distance="km" pressure="mb" speed="km/h"/>
+<yweather:wind chill="-2"   direction="320"   speed="25.75" />
+<yweather:atmosphere humidity="87"  visibility="4.8"  pressure="948.19"  rising="1" />
+<yweather:astronomy sunrise="8:07 am"   sunset="5:45 pm"/>
+<image>
+<title>Yahoo! Weather</title>
+<width>142</width>
+<height>18</height>
+<link>http://weather.yahoo.com</link>
+<url>http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif</url>
+</image>
+<item>
+<title>Conditions for Antwerp, BE at 3:50 pm CET</title>
+<geo:lat>51.22</geo:lat>
+<geo:long>4.4</geo:long>
+<link>http://us.rd.yahoo.com/dailynews/rss/weather/Antwerp__BE/*http://weather.yahoo.com/forecast/BEXX0003_c.html</link>
+<pubDate>Tue, 09 Feb 2016 3:50 pm CET</pubDate>
+<yweather:condition  text="Mostly Cloudy"  code="28"  temp="3"  date="Tue, 09 Feb 2016 3:50 pm CET" />
+<description><![CDATA[
+<img src="http://l.yimg.com/a/i/us/we/52/28.gif"/><br />
+<b>Current Conditions:</b><br />
+Mostly Cloudy, 3 C<BR />
+<BR /><b>Forecast:</b><BR />
+Tue - Rain. High: 5 Low: 3<br />
+Wed - Showers. High: 7 Low: 2<br />
+Thu - PM Showers. High: 8 Low: 1<br />
+Fri - PM Light Rain. High: 7 Low: 2<br />
+Sat - PM Light Rain. High: 8 Low: 3<br />
+<br />
+<a href="http://us.rd.yahoo.com/dailynews/rss/weather/Antwerp__BE/*http://weather.yahoo.com/forecast/BEXX0003_c.html">Full Forecast at Yahoo! Weather</a><BR/><BR/>
+(provided by <a href="http://www.weather.com" >The Weather Channel</a>)<br/>
+]]></description>
+<yweather:forecast day="Tue" date="9 Feb 2016" low="3" high="5" text="Rain" code="12" />
+<yweather:forecast day="Wed" date="10 Feb 2016" low="2" high="7" text="Showers" code="11" />
+<yweather:forecast day="Thu" date="11 Feb 2016" low="1" high="8" text="PM Showers" code="39" />
+<yweather:forecast day="Fri" date="12 Feb 2016" low="2" high="7" text="PM Light Rain" code="11" />
+<yweather:forecast day="Sat" date="13 Feb 2016" low="3" high="8" text="PM Light Rain" code="11" />
+<guid isPermaLink="false">BEXX0003_2016_02_13_7_00_CET</guid>
+</item>
+</channel>
+</rss>
+
+<!-- fan1635.sports.bf1.yahoo.com Tue Feb  9 07:27:37 PST 2016 -->

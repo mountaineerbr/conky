@@ -1,0 +1,98 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 10
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 10
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment middle_middle
+gap_x 0
+gap_y 0
+minimum_size 20 300
+maximum_width 850
+###End Position#####
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window true
+own_window_argb_visual yes
+own_window_argb_value 102
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent no
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont Droid Sans:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+###End Color###
+
+TEXT
+${font "Droid Sans":size=12,weight:bold}${color4}Sensors${font "Droid Sans":size=12}${color0}${font ConkyColors:size=12}${alignr}B 
+${hr 2}
+${font "Droid Sans":size=12,weight:bold}${color5}${execi 5 sensors| column -c2} 
+

@@ -1,0 +1,96 @@
+conky.config = {
+-- Conky settings #
+	background = false,
+	update_interval = 1,
+
+	cpu_avg_samples = 2,
+	net_avg_samples = 2,
+
+	override_utf8_locale = true,
+
+	double_buffer = true,
+	no_buffers = true,
+
+	text_buffer_size = 2048,
+    --imlib_cache_size 0
+
+	temperature_unit = 'celsius',
+
+-- With class override, gets images to display properly (black bg)
+    own_window_argb_visual = true, 
+	own_window_argb_value = 0,
+
+-- Window specifications #
+    own_window_class = override,
+	own_window = true,
+-- XFCE4 = desktop, sinon 'normal'
+	own_window_type = 'desktop',
+	own_window_transparent = true,
+
+-- XFCE4 - undecorate not working
+	own_window_hints = 'sticky,skip_taskbar,skip_pager,below',
+
+	border_inner_margin = 0,
+	border_outer_margin = 0,
+
+	minimum_width = 520, 
+    minimum_height = 600,
+	maximum_width = 520,
+
+	alignment = 'top_right',
+	gap_x = 20,
+	gap_y = 112,
+
+-- Graphics settings #
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = false,
+
+-- useless
+	default_shade_color = 'red',
+	default_outline_color = 'green',
+
+-- Text settings #
+	use_xft = true,
+	override_utf8_locale = true,
+--{{ FONTTEXT }}
+	xftalpha = 0.9,
+	uppercase = false,
+
+-- TEXT color
+	default_color = '#333333',
+
+--{{ COLOR0 }}
+--{{ COLOR1 }}
+
+	lua_load = '~/conky/conky-grapes/rings-v2_gen.lua',
+	lua_draw_hook_pre = 'conky_main',
+
+    diskio_avg_samples = 2
+};
+
+conky.text = [[
+${voffset 12}${color1}${goto 106}${freq_g cpu0} Ghz${alignr 330}${hwmon 1 temp 1} °C
+#${voffset 16}${color1}${goto 106}${freq_g cpu0} Ghz${alignr 330}${acpitemp} °C
+## CPU ###################
+#{{ CPU }}
+${goto 50}${color1}${top name 2}${alignr 306}${top cpu 2}%
+${goto 50}${color1}${top name 3}${alignr 306}${top cpu 3}%
+${font Michroma:size=10}${color0}${goto 80}${voffset 4}CPU
+## DISKIO ################
+#{{ DISKIO }}
+## MEMORY ################
+#{{ MEMORY }}
+## FILESYSTEMS #################
+#{{ FILESYSTEM }}
+## INTERNET ################
+${font Michroma:size=10}${color0}${voffset 26}${goto 324}INTERNET INFO
+#{{ NETWORK }}
+## TIME ########################
+#{{ TIME }}
+## BATTERY #####################
+#{{ BATTERY }}
+## OS
+#{{ OS }}
+]];

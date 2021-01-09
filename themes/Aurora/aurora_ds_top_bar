@@ -1,0 +1,121 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 20
+gap_y 60
+minimum_size 1600 140
+maximum_width 1600
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual no
+own_window_argb_value 153
+own_window_class systemConky
+own_window_colour FFFFFF
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all possibilities normal, desktop, dock, panel or override
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+#This setting seemed to be better for Ubuntu 14.10
+#own_window_type override
+own_window_transparent yes
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+###End Color###
+
+###Loading lua script###
+#lua_load ./lua/seamod_rings_original_seajey.lua
+#lua_draw_hook_pre main
+###End Loading Lua###
+TEXT
+${font Sans:size=8}${color4}${image ~/.conky/Aurora/images/bb_1.png -p -1x0}
+${font Sans:size=8}${goto 20}${color}${execi 86400 cat /etc/issue.net | awk {'print $1,$2,$3'}}${font Sans:size=8}${goto 130}\
+${color3}    | |  ${color4}time: ${goto 200}${color2}${uptime_short}${goto 250}\
+${color3}    | |  ${color4}cpu1: ${goto 310}${color2}${cpu cpu0}%${color}${goto 340}${cpugraph cpu0 10,50 FFFFFF FFFFFF}\
+${color3}    | |  ${color4}cpu2: ${goto 460}${color2}${cpu cpu1}%${color}${goto 490}${cpugraph cpu1 10,50 FFFFFF FFFFFF}\
+${color3}    | |  ${color4}cpu3: ${goto 610}${color2}${cpu cpu2}%${color}${goto 640}${cpugraph cpu2 10,50 FFFFFF FFFFFF}\
+${color3}    | |  ${color4}cpu4: ${goto 760}${color2}${cpu cpu3}%${color}${goto 790}${cpugraph cpu3 10,50 FFFFFF FFFFFF}\
+${color3}    | |  ${color4}cpu5: ${goto 910}${color2}${cpu cpu4}%${color}${goto 940}${cpugraph cpu4 10,50 FFFFFF FFFFFF}\
+${color3}    | |  ${color4}cpu6: ${goto 1060}${color2}${cpu cpu5}%${color}${goto 1080}${cpugraph cpu5 10,50 FFFFFF FFFFFF}\
+${color3}    | |  ${color4}cpu7: ${goto 1210}${color2}${cpu cpu6}%${color}${goto 1240}${cpugraph cpu6 10,50 FFFFFF FFFFFF}\
+${color3}    | |  ${color4}cpu8: ${goto 1360}${color2}${cpu cpu7}%${color}${goto 1390}${cpugraph cpu7 10,50 FFFFFF FFFFFF}
+
+${alignc}${color4}${goto 300}ram: ${color2}$memperc% ${color} ${memgraph 10,50 FFFFFF FFFFFF}\
+${color3}    | |    ${color4}up:   ${color2}${upspeedf eth0} kb/s${goto 540}${color}${upspeedgraph eth0 10,50 FFFFFF FFFFFF}\
+${color3}    | |    ${color4}down: ${color2}${downspeedf eth0} kb/s${goto 730}${color}${downspeedgraph eth0 10,50 FFFFFF FFFFFF}\
+${color3}    | |    ${color4}ip: ${color2}${execi 100 wget http://checkip.dyndns.org/ -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>'}\
+${color3}    | |    ${color4}ping: ${color2}${execi 20 ping -c3 -q google.com | grep 'ms' | awk -F'=' '{ printf $2}' | awk -F'ms' '{ printf $1}' | awk -F'/' '{ printf $2}'}ms\
+${color3}    | |    ${color4}cpu:  ${color2}${execi 10 sensors | grep 'Core 0' | awk {'print $3'}}  \
+${color3}    | |    ${color4}gpu: ${color2}+${execi 60 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader}.0°C   \
+${color3}    | |    ${color4}hdd: ${color2}${fs_free /} free

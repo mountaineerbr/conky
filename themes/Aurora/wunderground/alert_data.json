@@ -1,0 +1,30 @@
+﻿
+{
+  "response": {
+  "version":"0.1",
+  "termsofService":"http://www.wunderground.com/weather/api/d/terms.html",
+  "features": {
+  "alerts": 1
+  }
+	}
+		,"query_zone": "999",
+	"alerts": [
+		{
+		"type": "WIN",
+		"wtype_meteoalarm": "2",
+		"wtype_meteoalarm_name": "Snow/Ice",
+		"level_meteoalarm": "2",
+		"level_meteoalarm_name": "Yellow",
+		"level_meteoalarm_description": "The weather is potentially dangerous. The weather phenomena that have been forecast are not unusual, but be attentive if you intend to practice activities exposed to meteorological risks. Keep informed about the expected meteorological conditions and do not take any avoidable risk.",
+		"description": "Snow/Ice NL : SNEEUW + IJSPLEKKENVanavond vallen er nog winterse buien die, behalve aan zee, tijdelijk voor gladheid kunnen zorgen. De buien vallen landinwaarts in toenemende mate onder de vorm van sneeuw. Boven 300m valt er nog een paar centimeter verse sneeuw.\u000A \u000A Ook is er gevaar voor aanvriezende natte weggedeelten, vooral laterop de nacht en morgenochtend.\u000A FR : NEIGE + PLAQUES DE GLACECe soir, il pourra encore y avoir des averses hivernales qui pourront temporairement Ãªtre, Ã  l\u0027exception de la cÃ´te, source de verglas. Les averses, sous forme de neige, gagneront l\u0027intÃ©rieur des terres en augmentant en intensitÃ©. Au-dessus de 300 m, il pourra encore y avoir encore quelques centimÃ¨tres de neige fraÃ®che.Nous prÃ©voyons Ã©galement un risque de givre sur les sections de route humides, surtout en fin de nuit et Ã  l\u0027aube.&nbsp",
+		"date": "2015-02-01 15:00:00 GMT",
+		"date_epoch": "NA",
+		"expires": "2015-02-02 08:00:00 GMT",
+		"expires_epoch": "NA",
+		"message": "Snow/Ice NL : SNEEUW + IJSPLEKKENVanavond vallen er nog winterse buien die, behalve aan zee, tijdelijk voor gladheid kunnen zorgen. De buien vallen landinwaarts in toenemende mate onder de vorm van sneeuw. Boven 300m valt er nog een paar centimeter verse sneeuw.\u000A \u000A Ook is er gevaar voor aanvriezende natte weggedeelten, vooral laterop de nacht en morgenochtend.\u000A FR : NEIGE + PLAQUES DE GLACECe soir, il pourra encore y avoir des averses hivernales qui pourront temporairement Ãªtre, Ã  l\u0027exception de la cÃ´te, source de verglas. Les averses, sous forme de neige, gagneront l\u0027intÃ©rieur des terres en augmentant en intensitÃ©. Au-dessus de 300 m, il pourra encore y avoir encore quelques centimÃ¨tres de neige fraÃ®che.Nous prÃ©voyons Ã©galement un risque de givre sur les sections de route humides, surtout en fin de nuit et Ã  l\u0027aube.&nbsp)",
+		"phenomena": "NA",
+		"significance": "NA",
+		"attribution": "Information provided by , <a href='http://meteoalarm.eu/'>EUMETNET - MeteoAlarm</a> Note: Time delays between this website and <a href='http://meteoalarm.eu/'>Meteoalarm.eu</a> are possible. For the most up-to-date information about alert levels as published by the participating National Meteorological Services, please visit <a href='http://meteoalarm.eu/'>Meteoalarm</a>. For terms of use of this information, and copyright information, see <a href='http://meteoalarm.eu/'>Meteoalarm</a> Terms of Use."
+		}
+	]
+}

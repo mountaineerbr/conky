@@ -1,0 +1,122 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units no
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 350
+gap_y 40
+minimum_size 300 520
+maximum_width 300
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual yes
+own_window_argb_value 102
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent no
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+#Red#
+color7 FF0000
+###End Color###
+
+# See file Harddisks for more explanations
+TEXT
+${font Ubuntu:size=12,weight:bold}${color4}HARDDISKS${alignr}${color0}${font ConkyColors:size=12}i    
+${font Ubuntu:size=12,weight:bold}${color}${hr 2}
+${color5}Disks
+${font Ubuntu:size=12,weight:bold}${color}SDA  ${execi 86400 smartctl  -a /dev/sda | grep 'User Capacity:'|awk {'print $5$6'}} ${alignr}#${execi 86400 smartctl  -a /dev/sda | grep 'Power_On_Hours'|awk {'print $10'}} Hours
+${color}${font Ubuntu:size=12,weight:bold}
+${offset 10}${execi 86400 smartctl -i /dev/sda | grep 'Model Family'| cut -c19-}${alignr}${execi 10 hddtemp --debug /dev/sda |grep 192 | awk {'print $3'}}C°
+#ALT ${offset 10}${execi 86400 smartctl -i /dev/sda | grep 'Device Model'| cut -c19-}${alignr}${execi 10 hddtemp --debug /dev/sda |grep 190 | awk {'print $3'}}C°
+${offset 10}${color}Root    ${font Ubuntu:size=9,weight:bold}${color5}[${fs_size /}]
+${offset 10}${if_match ${fs_used_perc /} > 80}${color7}${else}${color4}${endif}${fs_bar 10,150 /} ${fs_used_perc /}%${color4}${alignr}Free: ${color0}${alignr}${fs_free /}
+${font Ubuntu:size=12,weight:bold}${offset 10}Home    ${font Ubuntu:size=9,weight:bold}${color5}[${fs_size /home}]
+${offset 10}${if_match ${fs_used_perc /home} > 80}${color7}${else}${color4}${endif}${fs_bar 10,150 /home} ${fs_used_perc /home}%${alignr}${color4}Free: ${color}${alignr}${fs_free /home}\
+${if_mounted /media/erik/Data}\
+${font Ubuntu:size=12,weight:bold}${color}SDB  ${execi 86400 smartctl  -a /dev/sdb | grep 'User Capacity:'|awk {'print $5$6'}}  ${alignr}${execi 86400 smartctl  -a /dev/sdb | grep 'Power_On_Hours'|awk {'print $10'}} Hours
+${offset 10}${color}${font Ubuntu:size=12,weight:bold}${execi 86400 smartctl -a /dev/sdb | grep 'Device Model'| cut -c19-}${alignr}${execi 10 hddtemp --debug /dev/sdb |grep "field(194)" | awk {'print $3'}}C°
+${offset 10}Data    ${font Ubuntu:size=9,weight:bold}${color5}[${fs_size /media/erik/Data}]
+${offset 10}${color4}${fs_bar 10,150 /media/erik/Data} ${fs_used_perc /media/erik/Data}%${alignr}Free: ${color}${alignr}${fs_free /media/erik/Data}${endif}
+${if_mounted /media/erik/Backup}
+${font Ubuntu:size=12,weight:bold}${color}SDC  ${execi 86400 smartctl  -a /dev/sdc | grep 'User Capacity:'|awk {'print $5$6'}}  ${alignr}${execi 86400 smartctl  -a /dev/sdc | grep 'Power_On_Hours'|awk {'print $10'}} Hours
+${offset 10}${color}${font Ubuntu:size=12,weight:bold}${execi 86400 smartctl -a /dev/sdc | grep 'Device Model'| cut -c19-}${alignr}${execi 10 hddtemp --debug /dev/sdc |grep 194 | awk {'print $3'}}C°
+${offset 10}Backup  ${font Ubuntu:size=9,weight:bold}${color5}  [${fs_size /media/erik/Backup}]
+${offset 10}${color4}${fs_bar 10,150 /media/erik/Backup} ${fs_used_perc /media/erik/Backup}%${alignr}Free: ${color}${alignr}${fs_free /media/erik/Backup}${endif}
+${color4}Read   ${alignr}${color0}${diskio_read}
+${color}${diskiograph_read 40,300 4B1B0C FF5C2B 100000 -t }
+${color4}Write  ${alignr}${color}${diskio_write}
+${color}${diskiograph_write 40,300 324D23 77B753 100000 -t }

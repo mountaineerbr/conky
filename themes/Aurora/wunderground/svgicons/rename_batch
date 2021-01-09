@@ -1,0 +1,9 @@
+#!/bin/bash
+x=1
+while [ $x -le 55 ]
+do
+  echo "Welcome $x times"
+  inkscape $x.svg --export-png=$x.png
+
+  x=$(( $x + 1 ))
+done

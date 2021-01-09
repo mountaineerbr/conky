@@ -1,0 +1,145 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : By Jesse_Avalos , See me on Eye Candy Linux_  on Google +
+# http://speedracker.deviantart.com/art/Side-thin-conky-Made-for-Conky-Manager-513212857
+# ram icon from http://www.flaticon.com/authors/freepik
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 0
+gap_y 40
+minimum_size 200 600
+maximum_width 600
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 0
+own_window_argb_visual yes
+
+#own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+#own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+# change color here and all changes except icons - imagemagick can help you change them automatically
+default_color 00EE00
+default_outline_color 000000
+default_shade_color 000000
+color1 212021
+color2 E8E1E6
+color3 E82A2A
+color4 20D456  #spring green
+color5 0C5702  #bilbao green
+color6 9DF3D6  #keppel green
+color7 00EE00  #final green
+###End Color###
+
+###Loading lua script###
+###End Loading Lua###
+
+TEXT
+${color}${goto 100}${voffset 3}${font Raleway:size=15}${execi 6000 lsb_release -d | cut -f 2| tr "[:upper:]" "[:upper:]"}${font Raleway:size=8}${alignr}v3.0.4  
+${image ./green/side.png -p 100,33 -s 115x4}
+${goto 110}${voffset 15}${font LG Weather_Z:size=80}${time %I}
+${goto 110}${voffset -17}${font LG Weather_Z:size=80}${time %M}
+${goto 110}${voffset -265}${font Helvetica Neue LT Com:size=22}${time %a %d} ${font Helvetica Neue LT Com:size=20}
+${goto 110}${voffset 169}${time %b,%Y}
+${image side.png -p 100,270 -s 115x4}${font Helvetica Neue LT Com:Bold:size=15}${goto 128}${voffset 5}Weather
+${image side.png -p 100,305 -s 115x4}
+# --- Weather --- #
+###################
+\
+# --- WOEID (Location id) --- #
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=12817504&u=c" -o ~/.cache/weather.xml}\
+# --- Temperature --- #
+#######################
+\
+${font LG Weather_Z:size=35}${offset 115}${voffset -8}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font GeosansLight:bold:size=9}Celsius${font Helvetica Neue LT Com:size=13}
+
+${font LG Weather_Z:bold:size=12}${offset 130}${voffset -10}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+
+${offset 175}${voffset -30}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+
+# --- Icon - high temperature --- #
+###################################
+\
+${image ./green/arrow-up.png -p 112,368 -s 10x10}
+
+# --- Icon - low temperature icon --- #
+#######################################
+\
+${image ./green/arrow-down.png -p 162,368 -s 10x10}
+
+${image ./green/side.png -p 100,387 -s 115x4}
+${font Helvetica Neue LT Com:Bold:size=15}${goto 128}${voffset -75}Systems
+${image ./green/side.png -p 100,420 -s 115x4}
+####Systems###
+${offset 135 }${voffset 2}${font GeosansLight:Bold:size=10}${execi 10 sensors | grep 'Core 0' | awk {'print $3'}}
+${image ./green/Chip.png -p 105,470 -s 20x20}${offset 135}${font GeosansLight:Bold:size=8}${voffset 14}${cpu cpu0}% ${goto 185}/${goto 190}100%
+${image ./green/mirco.png -p 108,500 -s 15x15}${offset 135}${voffset 15}$memfree${goto 185}/${goto 190}$memmax
+${image ./green/up.png -p 108,525 -s 15x15}${offset 135}${voffset 12}${upspeed eth0}${goto 185}/${goto 190}${totalup eth0}
+${image ./green/dwn.png -p 108,555 -s 15x15}${offset 135}${voffset 17}${downspeed eth0}${goto 185}/${goto 190}${totaldown eth0}
+
+
+
+${image ./green/thero.png -p 105,440 -s 18x18}
+# To change colors do a find/replace action to find the folder name/color  ./ green or ./ white and so on
+# script is added so please be creative and choose better colors ;-)

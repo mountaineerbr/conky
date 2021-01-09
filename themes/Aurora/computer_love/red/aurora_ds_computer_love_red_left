@@ -1,0 +1,115 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : http://4bidden404.deviantart.com/ 
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment middle_left
+gap_y -160
+gap_x 640
+minimum_size 400 600
+maximum_width 600
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 0
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 0
+own_window_argb_visual no
+#own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type normal
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+#own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont Roboto:bold:size=6
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+default_color 333333 #dark gray
+color0 ff3333 #red
+color1 818181 #gray
+color2 1994D1 #blue
+
+###Loading lua script###
+###End Loading Lua###
+
+
+TEXT
+${font Roboto:bold:size=10}${color0}SYSTEM INFO${color1}  ${hr 2}
+${font Roboto:bold:size=8}${goto 95}${color1}$sysname $kernel $alignr $machine
+${font Roboto:bold:size=8}${goto 95}${color1}CPU${alignr 0}${color1}Intel i5-2430M ${freq_g cpu0}Ghz
+${font Roboto:bold:size=8}${goto 95}${color1}RAM ${goto 220}$mem / $memmax $alignr $memperc%
+${goto 95}${color}$membar
+${font Roboto:bold:size=8}${goto 95}${color1}Uptime ${alignr 0}${color1}${uptime_short}
+${font Roboto:bold:size=10}${color0}HDD${color1}  ${hr 2}
+${font Roboto:bold:size=8}${goto 95}${color1}/root ${goto 220}${fs_used /} / ${fs_size /} $alignr ${fs_free_perc /}%
+${goto 95}${color}${fs_bar /}
+${font Roboto:bold:size=8}${goto 95}${color1}/home ${goto 220}${fs_used /home} / ${fs_size /home} $alignr ${fs_free_perc /home}%
+${goto 95}${color}${fs_bar /home}
+${font Roboto:bold:size=8}${goto 95}${color1}/Data ${goto 220}${fs_used /media/erik/Data} / ${fs_size /media/erik/Data} $alignr ${fs_free_perc /media/erik/Data}%
+${goto 95}${color}${fs_bar /media/erik/Data}
+${font Roboto:bold:size=10}${goto 35}${color0}TIME ${color1}${hr 2}${voffset 10}
+${color0} ${font :size=30}${goto 155}${time %H:%Mh}
+${voffset -30}${font Roboto:bold:size=10}${goto 185}${time %d %b. %Y}
+${font Roboto:bold:size=8}${goto 200}${time %A}
+
+
+${goto 35}${battery_bar 2,350}
+
+
+
+

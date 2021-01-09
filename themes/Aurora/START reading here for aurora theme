@@ -1,0 +1,32 @@
+#==============================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#==============================================================================
+
+Instructions
+
+Are you more a youtube kind of guy, listen to the English spoken installation movie.
+
+http://erikdubois.be/linux/install-conky-theme-aurora
+
+Best to use the following procedure i.e AUTOINSTALL_aurora.sh to install conky and all the other programs to have a fully functional Conky Aurora theme.
+
+The script is working with apt-get. All debian based distro's will work with this.
+
+Ubuntu en all Linux Mint flavors tested.
+
+1. Read the AURORA_README file
+
+		1.	purpose of the project
+		2.	version changes
+
+2. Read the INSTALLATION_AURORA_EXPLAINED file
+
+		1.	Conky installation and its components
+
+		2. 	Conky aurora theme installation

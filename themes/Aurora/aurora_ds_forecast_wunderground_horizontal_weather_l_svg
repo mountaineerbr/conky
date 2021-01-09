@@ -1,0 +1,97 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#======================================================================================
+
+background yes
+update_interval 1
+
+cpu_avg_samples 1
+net_avg_samples 2
+temperature_unit celsius
+
+double_buffer yes
+no_buffers yes
+text_buffer_size 2048
+border_inner_margin 0
+border_outer_margin 10
+alignment top_right
+
+gap_x 20
+gap_y 20
+minimum_size 300 40
+maximum_width 1200
+
+own_window yes
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for GeosansLight bold 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+own_window_argb_visual yes
+own_window_colour 000000
+own_window_argb_value 0
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+
+override_utf8_locale yes
+use_xft yes
+xftfont GeosansLight bold:size=10
+xftalpha 0.9
+uppercase no
+
+# Defining colors
+default_color FFFFFF
+# Shades of Gray
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+# Orange
+color4 EF5A29
+# Green
+color5 77B753
+# Light Orange
+color6 FFA300
+
+TEXT
+${color1}${font GeosansLight:size=22}WEATHER @ ANTWERP
+${voffset -15}${font GeosansLight:size=10}${color}${alignr 5}Fetched ${execi 1200  sed -n '53p' $HOME/.conky/Aurora/wunderground/Conditions}
+#${hr 2}
+${execi 1200 $HOME/.conky/Aurora/wunderground/wg_svg.sh}\
+${image $HOME/.conky/Aurora/wunderground/cachesvg/Now.png -p 50,50 -s 100x100}${font GeosansLight bold:size=14} Now\
+#${image $HOME/.conky/Aurora/wunderground/cachesvg/Moon_phase.png -p 170,70 -s 80x80}
+		${voffset 80}${font GeosansLight bold:size=12}${color}
+		${goto 25}${execi 1200 echo `date --date="1 day" | awk '{print $1" "$3}'`}\
+		${goto 95}${execi 1200 echo `date --date="2 day" | awk '{print $1" "$3} {}'`}\
+		${goto 165}${execi 1200 echo `date --date="3 day" | awk '{print $1" "$3} {}'`}\
+		${goto 235}${execi 1200 echo `date --date="4 day" | awk '{print $1" "$3} {}'`}${color}
+	${goto 35}${execi 1200  sed -n '145p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°\
+	${goto 105}${execi 1200  sed -n '251p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°\
+	${goto 175}${execi 1200  sed -n '357p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°\
+	${goto 245}${execi 1200  sed -n '463p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°
+		${goto 35}${color}${execi 1200  sed -n '150p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°\
+		${goto 105}${color}${execi 1200  sed -n '256p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°\
+		${goto 175}${color}${execi 1200  sed -n '362p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°\
+		${goto 245}${color}${execi 1200  sed -n '468p' $HOME/.conky/Aurora/wunderground/Simple_Forecast}°
+			${image $HOME/.conky/Aurora/wunderground/cachesvg/d2.png -p 0,200 -s 60x60}\
+			${image $HOME/.conky/Aurora/wunderground/cachesvg/d3.png -p 70,200 -s 60x60}\
+			${image $HOME/.conky/Aurora/wunderground/cachesvg/d4.png -p 140,200 -s 60x60}\
+			${image $HOME/.conky/Aurora/wunderground/cachesvg/d5.png -p 210,200 -s 60x60}\
+
+

@@ -1,0 +1,136 @@
+#======================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : http://la-manoue.deviantart.com/art/Conky-Dark-373706858
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 20
+gap_y 40
+minimum_size 500 520
+maximum_width 500
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 0
+own_window_argb_visual yes
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+cdefault_color 999999
+color0 d00420
+color1 999999
+color2 1994D1
+color3 1994D1
+color6 FFA300 
+###End Color###
+
+###Loading lua script###
+lua_load ~/.conky/Aurora/lua/rings-v1.2.1.lua
+lua_draw_hook_pre rings-v1.2.1.lua
+lua_draw_hook_pre main
+###End Loading Lua###
+
+TEXT
+${font Ubuntu Mono:size=18}${color0}${voffset -10}${alignr 20}${pre_exec cat /etc/issue.net}  ${machine}
+${kernel}
+${font Open 24 Display St:bold:size=18}${voffset 50 }${goto 380}${color6}${execi 10 sensors | grep 'Core 0' | awk {'print $3'}}
+${font Ubuntu mono:bold:size=8}${voffset -92}${goto 128}${color1}CPU 1 ${alignr 330}${color1}${cpu cpu0}%
+${font Ubuntu mono:bold:size=8}${voffset 4}${goto 128}${color1}CPU 2${alignr 330}${color1}${cpu cpu1}%
+${font Ubuntu mono:bold:size=8}${voffset 4}${goto 128}${color1}CPU 3${alignr 330}${color1}${cpu cpu2}%
+${font Ubuntu mono:bold:size=8}${voffset 2}${goto 128}${color1}CPU 4${alignr 330}${color1}${cpu cpu3}%
+${goto 50}${voffset 12}${font Ubuntu mono:bold:size=8}${color1}${top name 1}${alignr 306}${top cpu 1}%
+${goto 50}${font Ubuntu mono:bold:size=8}${color1}${top name 2}${alignr 306}${top cpu 2}%
+${goto 50}${font Ubuntu mono:bold:size=8}${color1}${top name 3}${alignr 306}${top cpu 3}%
+${font Ubuntu mono:size=14}${color0}${goto 52}${voffset 8}CPU  ${freq_g cpu0} Ghz
+${font Ubuntu mono:size=14}${color0}${goto 400}${voffset 48}MEMORY
+${goto 360}${voffset -6}${font Ubuntu mono:bold:size=8}${color1}${top_mem name 1}${alignr 40}${top_mem mem 1}%
+${goto 360}${font Ubuntu mono:bold:size=8}${color1}${top_mem name 2}${alignr 40}${top_mem mem 2}%
+${goto 360}${font Ubuntu mono:bold:size=8}${color1}${top_mem name 3}${alignr 40}${top_mem mem 3}%
+${font Ubuntu mono:bold:size=8}${voffset 6}${goto 350}${color1}SWAP${alignr 30}${color1}${swap} / ${color1}${swapmax}
+${font Ubuntu mono:bold:size=8}${voffset }${goto 350}${color1}RAM ${alignr 30}${color1}${mem} / ${color1}${memmax}
+${font Ubuntu mono:bold:size=8}${goto 80}${voffset -50}Root${color1}${alignr 310}${fs_used /} / ${fs_size /}
+${font Ubuntu mono:bold:size=8}${goto 80}${voffset 2}Home${alignr 310}${color1}${fs_used /home} / ${fs_size /home}
+${font Ubuntu mono:bold:size=8}${goto 80}${voffset 1}Usr${alignr 310}${color1}${fs_used /usr} / ${fs_size /usr}
+${font Ubuntu mono:size=14}${color0}${goto 102}${voffset 2}HARD DRIVE
+${font Ubuntu mono:size=14}${color0}${voffset 30}${goto 330}INTERNET INFO
+${if_existing /proc/net/route wlan0}${font Ubuntu mono:bold:size=8}${color1}${goto 320}${voffset -14}WiFi${goto 350}${color1}${wireless_essid wlan0}${font Ubuntu mono:bold:size=8}${color1}${goto 300}${voffset 9}Up${goto 370}${color1}${totalup wlan0} / ${color1}${upspeed wlan0}
+${font Ubuntu mono:bold:size=8}${goto 300}${color1}Down${goto 370}${color1}${totaldown wlan0} / ${color1}${downspeed wlan0}
+${font Ubuntu mono:bold:size=8}${goto 300}${voffset 2}Local IP${goto 370}${addr wlan0}
+${font Ubuntu mono:bold:size=8}${goto 300}${voffset -1}Public IP${goto 370}${execi 3600 wget -q -O - checkip.dyndns.org | sed -e 's/[^[:digit:]\|.]//g'}
+${font Ubuntu mono:size=14}${goto 128}${voffset -38}${color0}${time %a} ${color0}${time %x}
+${font Ubuntu mono:bold:size=22}${goto 162}${color1}${voffset 0}${time %H}:${time %M}
+${font Ubuntu mono:size=14}${color0}${goto 300}${voffset 22}BATTERY
+${font Ubuntu mono:size=14}${color0}${goto 282}${voffset -2}${color1}${battery_percent BAT1}%
+${else}${if_existing /proc/net/route eth0}${font Ubuntu mono:bold:size=8}${color1}${goto 300}${voffset -6}Up${goto 370}${color1}${totalup wlan0} / ${color1}${upspeed wlan0}
+${font Ubuntu mono:bold:size=8}${goto 300}${color1}Down${goto 370}${color1}${totaldown wlan0} / ${color1}${downspeed wlan0}
+${font Ubuntu mono:bold:size=8}${goto 300}${voffset 2}Local IP${goto 370}${addr eth0}
+${font Ubuntu mono:bold:size=8}${goto 300}${voffset -1}Public IP${goto 370}${execi 3600 wget -q -O - checkip.dyndns.org | sed -e 's/[^[:digit:]\|.]//g'}
+${font Ubuntu mono:bold:size=14}${goto 80}${voffset -40}${color0}${time %a} ${color0}${time %x}
+${font Ubuntu mono:bold:size=22}${goto 110}${color1}${voffset 0}${time %H}:${time %M}
+${font Ubuntu mono:size=14}${color0}${goto 300}${voffset 26}BATTERY
+${font Ubuntu mono:size=14}${color0}${goto 282}${voffset -2}${color1}${battery_percent BAT1}%${endif}${endif}
+#${font Ubuntu mono:bold:size=8}${goto 180}Uptime${color1}${alignr 100}${uptime_short}

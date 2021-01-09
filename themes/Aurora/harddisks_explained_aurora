@@ -1,0 +1,41 @@
+#==============================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#==============================================================================
+
+Harddisk info can be acquired via terminal or gui
+
+terminal : lsblk
+
+lsblk to see a more tree like vision
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda      8:0    0 111,8G  0 disk 
+├─sda1   8:1    0   9,3G  0 part /
+├─sda2   8:2    0     1K  0 part 
+├─sda3   8:3    0  96,5G  0 part /home
+└─sda5   8:5    0     6G  0 part [SWAP]
+sdb      8:16   0 465,8G  0 disk 
+└─sdb1   8:17   0 465,8G  0 part 
+sdc      8:32   0 465,8G  0 disk 
+└─sdc1   8:33   0 465,8G  0 part 
+sr0     11:0    1  1024M  0 rom  
+sr1     11:1    1  1024M  0 rom 
+
+
+Gui : disks or gparted
+
+
+You may have to change some parameters.
+In the example above I have 3 harddisks. SDA SDB SDC each with their parameters.
+SDA is the first harddisk and is also an SSD which makes it difficult to read the temperature from.
+You should change the field number -- probably. At this time i have an Intel 520 series ssd so then you will not have to change the field number.
+Nor is it easy to guess or google to find out which is the correct number. Easiest way is to heat up the SSD by doing some harcore work like conversion of movies from one extension to another (e.g. mkv to mp4) This is a high intensity job for cpu and harddisk... and see which number is going up. That will be the temperature...
+
+
+The SDB and SDC point to my own name as they are mounted in /media/erik/Data and /Backup. You will have to change erik to the name you use on your system.
+CTRL + H Find and replace in an editor

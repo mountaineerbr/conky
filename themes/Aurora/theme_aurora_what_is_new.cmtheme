@@ -1,0 +1,17 @@
+#==============================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#=============================================================================
+~/.conky/Aurora/aurora_ds_general
+~/.conky/Aurora/aurora_ds_harddisk
+~/.conky/Aurora/aurora_ds_memory
+~/.conky/Aurora/aurora_ds_network
+~/.conky/Aurora/aurora_ds_nvidia_panel
+~/.conky/Aurora/aurora_ds_rss
+~/.conky/Aurora/wallpaper/wp_erik_257.jpg
+wallpaper-scaling:stretched

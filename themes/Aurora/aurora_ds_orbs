@@ -1,0 +1,127 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : http://lagadesk.deviantart.com/art/Conky-du-Hublot-sample-6-309722685
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 40
+gap_y 60
+minimum_size 900 200
+maximum_width 900
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 0
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 0
+own_window_argb_visual no
+
+#own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type override
+own_window_transparent yes
+#own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer right
+use_xft yes
+xftfont pftempestafivecondensed:size=6
+xftalpha 0.5
+###End Font###
+
+###Defining Colors###
+default_outline_color 000000
+default_shade_color 000000
+#Personal choices to be changed here#
+default_color 
+color1 
+###Purple - black
+#default_color A706A2
+#color1 000000
+### Red - Green
+#default_color FF5600
+#color1 A9FF00
+### Yellow -blue
+#default_color FFA726
+#color1 00A7FF
+### Yellow - white
+default_color FFA726
+color1 dddddd
+###End Color###
+
+###Loading lua script###
+lua_load ~/.conky/Aurora/lua/clock_rings_orbs.lua
+lua_draw_hook_pre clock_rings
+###End Loading Lua###
+
+#hour=3600
+#day=86400
+#you can also use orb-2.png in the images map. Change the lua to go further then halfway though.
+TEXT
+#${image ~/.conky/Aurora/images/orb-1b.png -p 0,0}
+${image ~/.conky/Aurora/images/orb-2_clock.png -p 0,0} 
+${image ~/.conky/Aurora/images/orb-1a.png -p 150,-2}
+#${image ~/.conky/Aurora/images/orb-2.png -p 150,-2}
+${image ~/.conky/Aurora/images/orb-1a.png -p 300,-2}
+#${image ~/.conky/Aurora/images/orb-2-light.png -p 300,-2}
+${image ~/.conky/Aurora/images/orb-1a.png -p 450,-2}
+${image ~/.conky/Aurora/images/orb-1a.png -p 600,-2}
+${image ~/.conky/Aurora/images/orb-1a.png -p 750,-2}
+${voffset -30}${color}${goto 210}${font Digital Readout Thick Upright:size=26,weight:bold}${cpu cpu0}${color}\
+${color}${goto 350}${font Digital Readout Thick Upright:size=26,weight:bold}${memperc}${color}\
+${color}${goto 505}${font Digital Readout Thick Upright:size=26,weight:bold}${acpitemp}${color}\
+${color}${goto 650}${font Digital Readout Thick Upright:size=26,weight:bold}${fs_used_perc /home}${color}\
+${color}${goto 800}${font Digital Readout Thick Upright:size=26,weight:bold}${fs_used_perc /}${color}\
+${font pftempestafivecondensed:size=6}${voffset 10}\
+${color1}${goto 200}cpu ${color1}[${color1} % ${color1}]${color1}\
+${color1}${goto 350}mem ${color1}[${color1} % ${color1}]${color1}\
+${color1}${goto 500}temp ${color1}[${color1} °C ${color1}]${color1}\
+${color1}${goto 645}home ${color1}[${color1} % ${color1}]${color1}\
+${color1}${goto 795}root ${color1}[${color1} % ${color1}]${color1}

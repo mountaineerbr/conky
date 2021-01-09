@@ -1,0 +1,127 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+# Original files
+# https://drive.google.com/folderview?id=0B0R9dPe6spPCfmhLTDEwdjBNbzRNdXZ4NVhKYXFsS2d3S0xyRHBvUFJrM21SWGY0a294Z2c&usp=sharing
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : https://github.com/mgalgs/conf-files/blob/master/conky/twilight/clock.lua
+#		   http://londonali1010.deviantart.com/art/quot-Air-quot-Clock-for-Conky-141958642
+#======================================================================================
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 20
+gap_y 60
+minimum_size 260 200
+maximum_width 1600
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual yes
+own_window_argb_value 0
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+##own_window_type normal
+own_window_transparent yes
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 FFA300 # hd color
+#Orange#
+color4 f4732d
+#Green#
+color5 77B753
+color6 46a646 #green
+color7 2c2c2c #color rulers
+color8 EAEAEA #Orange
+color9 4a89a7 #blue
+###End Color###
+
+###Loading lua script###
+###End Loading Lua###
+
+TEXT
+${font DroidLogo-bold:size=20}${time %A, %d %B %Y}
+${font DroidLogo-bold:size=25}${time %I:%M}
+${voffset -10}${font DroidLogo-bold:size=14}Mem ${memperc} ${goto 100}Cpu ${cpu cpu0} ${goto 180}Temp ${execi 10 sensors | grep 'Core 0' | awk {'print $3'}}
+\
+# --- Weather --- #
+###################
+\
+# --- WOEID (Location id) --- #
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=12817504&u=c" -o $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml}\
+\
+# --- Temperature --- #
+#######################
+\
+${font Droidlogo :size=14}${offset 340}${voffset -24}${execi 300 grep "yweather:condition" $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font Droidlogo :size=15}C${font Droidlogo :size=30}${voffset -20} |
+\
+# --- Weather icon --- #
+########################
+\
+${execi 300 cp -f $HOME/.conky/Aurora/images/flair_weather/outlineW/$(grep "yweather:condition" $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png $HOME/.conky/Aurora/images/flair_weather/cache/weather-1.png}${image $HOME/.conky/Aurora/images/flair_weather/cache/weather-1.png -p 450,0 -s 80x80}
+\
+# --- Textual condition (e.g. Partly cloudy) --- #
+##################################################
+\
+${font Droidlogo Light:size=14}${offset 410}${voffset -95}${execi 300 grep "yweather:condition" $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+${voffset 15}${font ConkyColors:size=18}e${color}${cpugraph 20,150 ffffff cccccc -t}\
+x${upspeedgraph eth0 20,150 4B1B0C FF5C2B 10000000 -l -t}\
+w${downspeedgraph eth0 20,150 324D23 77B753 10000000 -l -t}

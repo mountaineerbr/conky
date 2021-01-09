@@ -1,0 +1,108 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : http://itsfoss.com/weather-conky-linux/
+# Source : https://plus.google.com/110188656318786850894/posts
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 0
+gap_y 0
+minimum_size 600 100
+maximum_width 800
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 1
+draw_borders no
+draw_graph_borders no
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual yes
+own_window_argb_value 0
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont GeosansLight:light:size=9
+xftalpha 0.8
+###End Font###
+
+###Defining Colors###
+default_color EDEBEB
+default_outline_color 000000
+default_shade_color 000000
+#Colors#
+color1 212021
+color2 E8E1E6
+color3 E82A2A
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+###End Color###
+
+TEXT
+${goto 245}${voffset 25}${font GeosansLight:size=25} Today
+${goto 124}${voffset -}${font GeosansLight:light:size=70}${time %I:%M}${image $HOME/.conky/Aurora/images/system_flair/line.png -p 354,23 -s 3x189}
+${offset 125}${voffset -55}${font GeosansLight:size=17}${time %A, %d %B}
+${offset 380}${voffset -177}${font GeosansLight:size=25}System   ${font GeosansLight:size=22}
+${image $HOME/.conky/Aurora/images/system_flair/thero.png -p 365,72 -s 25x25}${offset 400}${voffset 5}${font GeosansLight:size=15}${execi 10 sensors | grep 'Core 0' | awk {'print $3'}}
+${image $HOME/.conky/Aurora/images/system_flair/Chip.png -p 365,105 -s 25x25}${offset 400}${voffset 10}${cpu cpu0}%${goto 470}/ 100%
+${image $HOME/.conky/Aurora/images/system_flair/mirco.png -p 365,134 -s 25x25}${offset 400}${voffset 4}${mem} / ${memmax}${font GeosansLight:size=15}
+${if_existing /proc/net/route eth0}\
+${image $HOME/.conky/Aurora/images/system_flair/up.png -p 368,163 -s 20x20}${offset 400}${voffset 5}${upspeed eth0}${goto 470}/ ${totalup eth0}
+${image $HOME/.conky/Aurora/images/system_flair/dwn.png -p 368,192 -s 20x20}${offset 400}${voffset 5}${downspeed eth0}${goto 470}/ ${offset 3}${totaldown eth0}\
+${else}\
+${image $HOME/.conky/Aurora/images/system_flair/up.png -p 368,163 -s 20x20}${offset 400}${voffset 5}${upspeed eth0}${goto 470}/ ${totalup eth0}
+${image $HOME/.conky/Aurora/images/system_flair/dwn.png -p 368,192 -s 20x20}${offset 400}${voffset 5}${downspeed eth0}${goto 470}/ ${offset 3}${totaldown eth0}${endif}

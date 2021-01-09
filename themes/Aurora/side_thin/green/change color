@@ -1,0 +1,14 @@
+#!/bin/bash
+# use this nifty little code to change the colors to your liking
+# http://imagemagick.org/script/color.php
+# http://www.imagemagick.org/Usage/color_basics/#replace
+#  00EE00   =   green2
+
+#SAVEIF=$IFS
+#IFS=$(echo -en "\n\b")
+
+for img in *.png
+do
+	name=${img%.png}
+	convert "$name.png" -fuzz 40%  -fill green2 -opaque white  "$name.png"
+done

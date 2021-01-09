@@ -1,0 +1,121 @@
+#======================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : http://www.superbwallpapers.com/tv-shows/walter-white-and-jesse-pinkman-16014/
+# Source : http://fc07.deviantart.net/fs70/f/2012/348/a/8/green_smoke_by_daatte-d5nzz5r.jpg
+#
+# Source Files : Gimp
+# https://drive.google.com/folderview?id=0B0R9dPe6spPCfkxVZ0tyU3lraW55VldQM2pCc0l6QzFGbEk3OVJJMngySmVOWGg2YzN4b0E&usp=sharing
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 80
+gap_y 0
+minimum_size 500 520
+maximum_width 500
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 0
+own_window_argb_visual yes
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+default_color FFFFFF
+color0 de883f
+color1 9b262c
+color2 266222
+color3 6cb764
+color4 dbb44d
+color5 6b161b
+color7 c13327
+color8 FFA300 
+###End Color###
+
+###Loading lua script###
+lua_load ~/.conky/Aurora/lua/rings-v1.2.1_breaking_bad.lua
+lua_draw_hook_pre rings-v1.2.1_breaking_bad.lua
+lua_draw_hook_pre main
+###End Loading Lua###
+
+TEXT
+${image ~/.conky/Aurora/images/walterwhite.png -p 10,0 -s 560x385}
+${voffset -20} ${goto 430}${color0}${font Zekton:style=bold:size=12}v3.0.4
+${voffset -10}${goto 40}${color0}${font Zekton:style=bold:size=16}${execi 10 sensors | grep 'Core 0' | awk {'print $3'}}  
+#${voffset }${goto 40}${color0}${font Zekton:style=bold:size=10}${acpitemp}°C
+${voffset 35}${goto 92}${color0}${font Zekton:style=bold:size=10}CPU1${goto 145}${color0}${font Zekton:style=bold:size=10}CPU2
+${voffset }${goto 98}${color0}${font Zekton:style=bold:size=10}${cpu cpu0}%${goto 149}${color0}${font Zekton:style=bold:size=10}${cpu cpu1}%
+${voffset 18 }${goto 230}${color0}${font Zekton:style=bold:size=10}RAM
+${goto 233}${color0}${font Zekton:style=bold:size=10}${memperc}%
+#${if_existing /proc/acpi/battery/BAT0/info}
+#${if_match ${battery_percent BAT0} >= 65 }${color green}${else}${if_match ${battery_percent BAT1} >=30 }${color orange}${else}${color red}${bat}${endif}${battery_percent BAT0}${battery_bar 4 BAT0}
+#${endif}
+
+
+${voffset}${color0}${color0}${font bonzai:style=Bold:size=22}${execi 86400 cat /etc/issue.net}
+${voffset}${goto 10}${color0}${font Zekton:style=bold:size=30}${time %H:%M}${color0}${font Zekton:style=bold:size=10}
+${voffset 20}${goto 355}${color0}${font Conky colors:style=bold:size=15}5${goto 455}${color0}${voffset -8}${font Zekton:style=bold:size=8}Root
+${goto 480}${color0}${voffset 40}${font Zekton:style=bold:size=8}Home

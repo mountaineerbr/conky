@@ -1,0 +1,108 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_middle
+gap_x 0
+gap_y 80
+minimum_size 1680 8
+maximum_width 1680
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual no
+own_window_argb_value 153
+own_window_class systemConky
+own_window_colour 3E3E3E
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all possibilities normal, desktop, dock, panel or override
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+#This setting seemed to be better for Ubuntu 14.10
+#own_window_type override
+own_window_transparent no
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_outline_color 000000
+default_shade_color 000000
+default_color D9D2DA
+color1 B6B6B6
+#light yellow#
+color4 C8373E
+#Mint green#
+color4 88C946
+#signal colors#
+#Orange
+color2 FFA300
+#Red#
+color9 CE0000
+###End Color###
+
+###Loading lua script###
+###End Loading Lua###
+TEXT
+${voffset -5}${font Zekton:size=12}    ${color}${pre_exec cat /etc/issue.net | awk {'print $1,$2,$3'}}${font Sans:size=8}\
+${color4}${goto 200}cpu:  ${color2}${goto 250}${cpu cpu0}%${color}${goto 300}${cpugraph cpu0 10,80 FFFFFF FFFFFF}\
+${color4}${goto 400}ram:  ${color2}${goto 450}${memperc}% ${color} ${goto 500}${memgraph 10,80 FFFFFF FFFFFF}\
+${color4}${goto 650}up:   ${color2}${goto 700}${upspeedf eth0} kb/s${color}${goto 800}${upspeedgraph eth0 10,80 FFFFFF FFFFFF}\
+${color4}${goto 900}down: ${color2}${goto 950}${downspeedf eth0} kb/s${color}${goto 1050}${downspeedgraph eth0 10,80 FFFFFF FFFFFF}\
+${color4}${goto 1150}root:  ${color2}${goto 1200}${fs_free /} free\
+${color4}${goto 1300}home:  ${color2}${goto 1350}${fs_free /home} free\
+${color4}${goto 1450}cpu: ${color2}${goto 1500}${execi 10 sensors | grep 'Core 0' | awk {'print $3'}}\
+${color4}${goto 1600}gpu: ${color2}${goto 1650}${execi 60 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader}°C

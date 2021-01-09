@@ -1,0 +1,106 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Sources
+#
+# Wallpaper: Cherry Blossom 
+# http://www.themebin.com/hd-wallpapers/cherry-blossom-hd-wallpaper/
+#
+# Conky by Jesse Avalos
+# http://speedracker.deviantart.com/art/Conky-Hermoso-Made-for-Conky-manager-451610911
+# https://plus.google.com/110188656318786850894/posts/gvDbYvc2nxy
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment middle_right
+gap_x 600
+gap_y 0
+minimum_size 550 550
+maximum_width 550
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 00
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 0
+own_window_argb_visual yes
+
+#own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+#own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont Feena Casual:size=10
+xftalpha 1
+###End Font###
+
+###Defining Colors###
+default_color D6D5D4
+default_outline_color 000000
+default_shade_color 112422
+###End Color###
+
+###Loading lua script###
+###End Loading Lua###
+
+TEXT
+
+
+${goto 35}${color 8A0D1C}${font Feena Casual:size=100}${time %I }${font Feena Casual:size=45}${color 000000}${time %A}#${color yellow}
+${color 000000}${goto 35}${voffset 55}${font Feena Casual:size=22}${time %d} ${font Feena Casual:size=65}${voffset -15}${time %B} ${font Feena Casual:size=22}${goto 65}${voffset 34}${time %Y}${font Feena Casual:size=100}${goto 155}${voffset -54}${color 8A0D1C}${time %M}${font Feena Casual:size=25}${color 000000} ${time %P}
+
+
+
+
+#${goto 60}${voffset -65}${font Feena Casual:size=23} ${time %A} |  #${time %B %d %Y}
+
+

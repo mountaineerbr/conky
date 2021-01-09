@@ -1,0 +1,218 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source
+# Snowy Conky
+# Assembled by Bhart Chauhan
+# https://plus.google.com/u/0/109578077190103601128/posts
+#
+#======================================================================================
+
+
+###Settings###
+background yes
+cpu_avg_samples 10
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 10
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 40
+gap_y 40
+minimum_size 450 800
+maximum_width 800
+###End Position###
+
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders no
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual yes
+own_window_argb_value 0
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=14
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+###End Color###
+
+lua_load ~/.conky/Aurora/SnowyConky/conky_clock.lua
+lua_draw_hook_pre clock_rings
+
+
+TEXT
+# --- Time and date --- #
+#########################
+\
+${offset 120}${voffset 15}${font Adele:size=54}${time %I:%M} ${font Adele:size=18:bold}${time %p}
+${offset 25}${voffset 5}${font Adele:size=22}${time %A,}
+${offset 90}${font Adele:size=24}${time %B} ${voffset -10}${font Adele:size=36}${time %d}
+${voffset -20}${font Roboto Light:size=9:bold}YEAR    ${time %Y}        MONTH    ${time %m}        WEEK    ${time %W}        DAY    ${time %j}
+
+# --- Weather --- #
+###################
+\
+# --- WOEID (Location id) --- #
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=12817504&u=c" -o ~/.cache/weather.xml}\
+\
+# --- Temperature --- #
+#######################
+\
+${offset 100}${voffset 5}${font Roboto Light:size=22}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font Roboto Light:size=18}c
+\
+# --- Textual weather (e.g. Partly cloudy, Sunny, etc.) --- #
+#############################################################
+\
+${offset 230}${voffset -35}${font Roboto Light:size=14}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+\
+# --- High temperature --- #
+############################
+\
+${offset 93}${voffset 3}${font Roboto Light:size=14}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+\
+# --- Low temperature --- #
+###########################
+\
+${offset 137}${voffset -27}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+\
+# --- Location name (city and country) --- #
+############################################
+\
+${offset 180}${voffset -26}${font Roboto Light:size=14:italic}${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "city=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}, ${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "country=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+\
+# --- SYSTEM stats --- #
+########################
+\
+${offset 35}${voffset 30}${font Roboto Light:size=9:bold}USED    ${fs_used}
+${offset 35}FREE    ${fs_free}
+${offset 185}${voffset -34}${font Roboto Light:size=9:bold}Dwn    ${downspeed eth0}
+${offset 185}Up       ${upspeed eth0}
+${offset 315}${voffset -34}${font Roboto Light:size=9:bold}Dwn    ${downspeed eth0}
+${offset 315}Up       ${upspeed eth0}
+${offset 30}${voffset 40}CPU1    ${cpu cpu0}%
+${offset 140}${voffset -17}CPU2    ${cpu cpu1}%
+${offset 250}${voffset -17}RAM    ${memperc}%
+${offset 30}${voffset -10}${cpugraph cpu0, 50, 70}          ${cpugraph cpu1, 50, 70}          ${memgraph 50, 70}
+
+${offset 30}${voffset 9}UPTIME
+${offset 30}${uptime}
+${offset 185}${voffset -34}USER
+${offset 185}${exec whoami}
+${offset 300}${voffset -34}${execi 60000 lsb_release -sd}
+${offset 300}${kernel}
+\
+# ---  ICONS --- #
+##################
+\
+# --- ICON thermometer --- #
+############################
+\
+${image ~/.conky/Aurora/SnowyConky/icons/thermometer.png -p 70,197 -s 32x32}
+\
+# --- ICON weather --- #
+########################
+\
+${execi 300 cp -f ~/.conky/Aurora/SnowyConky/icons/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 185,197 -s 32x32}
+\
+# --- ICON high temperature --- #
+###################################
+\
+${image ~/.conky/Aurora/SnowyConky/icons/arrow-up.png -p 75,240 -s 14x14}
+\
+# --- ICON low temperature icon --- #
+#######################################
+\
+${image ~/.conky/Aurora/SnowyConky/icons/arrow-down.png -p 120,240 -s 14x14}
+\
+# --- ICON map marker --- #
+#############################
+\
+${image ~/.conky/Aurora/SnowyConky/icons/map-marker.png -p 165,240 -s 14x14}
+\
+# --- ICON hard drive --- #
+###########################
+\
+${image ~/.conky/Aurora/SnowyConky/icons/hdd.png -p 0,298 -s 28x28}
+\
+# --- ICON wifi --- #
+###########################
+\
+${image ~/.conky/Aurora/SnowyConky/icons/wifi.png -p 150,298 -s 28x28}
+\
+# --- ICON ethernet --- #
+###########################
+\
+${image ~/.conky/Aurora/SnowyConky/icons/ethernet.png -p 280,298 -s 28x28}
+\
+# --- ICON hourglass --- #
+\
+${image ~/.conky/Aurora/SnowyConky/icons/history.png -p 0,473 -s 28x28}
+\
+# --- ICON user --- #
+\
+${image ~/.conky/Aurora/SnowyConky/icons/user.png -p 150,473 -s 28x28} 
+
+\
+# --- ICON Tux Pengin --- #
+\
+${image ~/.conky/Aurora/SnowyConky/icons/tux.png -p 260,473 -s 32x32} 

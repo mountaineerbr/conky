@@ -1,0 +1,128 @@
+#==============================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation : http://erikdubois.be/category/linux/aurora-conky/
+# 
+#==============================================================================
+
+The reading starts in the file START READING HERE (but welcome anyway)
+
+--------------------------------------------------------------------------------------
+
+You want to be able to run as quickly and easy as possible, I know but read this anyway diagonally.
+
+--------------------------------------------------------------------------------------
+
+Procedure for installation
+
+--------------------------------------------------------------------------------------
+
+1 	INSTALLING CONKY AND ALL THE NEEDED COMPONENTS
+
+	
+	GENERAL INFORMATION
+
+
+	Some of the commands I use to report details of my machine require a root elevation. 
+	To circumvent this I use a command in the terminal. Best not done on business 
+	computers, but for private owned computers...wtf
+
+	The idea of this project is to automate the installation and in the proces
+	 learn a lot about linux and my machine.
+
+	To be able to read out sensors of your computer you need to install sensors.
+    	You do not need to use the installation scripts. 
+    	You can Copy/paste each command line in the terminal. It can be a
+    	learning experience.
+
+	NVIDIA Panel will only work on computers with a nvidia card. Duh!
+
+	To be able to read out what harddisk you have, you need to install smartctl.
+
+	To be able to read out what temperature you have, you need to install hddtemp.
+
+	To be able to see the weather widget you need curl.
+
+
+
+	INSTALLATION
+
+	Normally the file is already an executable script but if not you have to make it executable. 
+	Explained on Youtube and on erikdubois.be.
+
+	You need to make the files "Auto_LinuxMint_Rosa_cinnamon_aurora.sh" or "Auto_Ubuntu_Utopic_aurora.sh" an executable so you can run it in a terminal.
+
+	In linuxmint you can use right-click on the file AUTOINSTALL_AURORA.sh, got to properties and take
+	tab permissions. Underneath make it an executable.
+
+	Double click on the file AUTOINSTALL_AURORA.sh. Choose run in terminal to do the installation or choose Display 
+	to read what will happen on your computer.
+
+	If you know your way around the terminal(CTRL+T). Use the "sudo chmod u+x AUTOINSTALL_AURORA.sh".
+	This will als make it an executable.
+
+	READ WHAT COMES UP IN THE TERMINAL AND FOLLOW ANY INSTRUCTIONS
+
+	
+	TORRENT SPECIFIC - TRANSMISSION !!!!!!!!!!!!
+
+	If you want your torrent popping up in the widget, you need to go to the program transmission.
+		Open it.
+		Go to edit.
+		Choose preferences
+		Choose tab remote
+		Allow remote access
+		Do not worry. Only you (127.0.0.1) can see this.
+
+	(if someone finds a command to do the above let me know)
+
+	If you want the GMAIL script to work, please fill in your username and password.
+	Make sure that in your GMAIL you can make an IMAP connection.
+
+	You should also check out the harddisks_explained_aurora file. You will probably need to change 
+	the sda, sdb, sdc... if SATA'S or hda, hdb and hdc for the IDE harddisks. Search and replace...
+
+
+
+2	DOWNLOADING THE AURORA THEME 
+
+You have an assistant on youtube, watch http://erikdubois.be/category/linux/aurora-conky/
+
+- You have executed the auto installation file (ubuntu or linux mint) 
+- start first the conky manager - THIS WILL CREATE THE HIDDEN .CONKY FOLDER !!  and close it again
+- Go to https://sourceforge.net/projects/auroraconkytheme/
+- download the latest theme
+- unpack it (right-click)
+- the folder gets a name like "Aurora_v3.x.x"
+
+
+- change the name of the folder in "Aurora"  ###IMPORTANT###    !!!!!!!!!!!!!!!!!!
+		
+		SCRIPTS POINT TO ~/.conky/Aurora  (first letter capital)
+		it should normally be named like that automatically
+
+
+- again whatever version you are downloading CHANGE THE FOLDER MANUALLY TO AURORA
+- Go to your Home folder
+- type CTRL+ H  (H for hidden folders)
+- ".conky" is now visible    !!! ONLY VISIBLE IF YOU STARTED CONKY MANAGER
+- copy/paste the folder Aurora in this hidden ".conky" folder
+- start Conky Manager and activate the widgets you want or use a themes
+- if you want to use the fonts in the fonts folder, install by double clicking (eg. Clock has Inspira font)-
+- a script is normally in place that puts all your fonts in ./fonts. So installing fonts should not be necessary.
+- change the nomination of your harddisk manually - read text harddisks - SDA OR HDA /home /etc...
+- sensors-detect is a program that will look at your hardware do this if not already done
+- in the terminal execute sensors and see what you get - change the grep search pattern to one's you have or use the widget
+  sensors to see what you are missing in the conky file. Sometimes it is named temp1 or tmp1 or other. This is related to YOUR motherboard.
+
+3 STARTING THE AUTOSCRIPT OR NOT
+
+- Choose the autoscript you need for your system. There are minute differences because of the naming of some of the programs.
+
+- run in a terminal to see what it will do.
+		./Auto_LinuxMint_Rosa_cinnamon_aurora.sh
+
+		

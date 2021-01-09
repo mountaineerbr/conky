@@ -1,0 +1,137 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 20
+gap_y 40
+minimum_size 300 780
+maximum_width 300
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual yes
+own_window_argb_value 102
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent no
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont Ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+#Red#
+color7 FF0000
+###End Color###
+
+###Loading lua script###
+lua_load ./lua/rings.lua
+lua_draw_hook_pre main_rings
+###End Loading Lua###
+
+#hour=3600
+#day=86400
+
+TEXT
+${font Ubuntu:size=12,weight:bold}${color4}Overview${font Ubuntu:size=7,weight:bold}${voffset -8}${alignr}v3.0.4  ${font Ubuntu:size=14,weight:bold}${color0}${font ConkyColors:size=14}E          
+${hr 2}
+#{font Ubuntu:size=12,weight:bold}${color5}${execi 86400 lsb_release -irc | grep 'Distributor'|awk {'print $3'}} ${execi 86400 lsb_release -irc | grep 'Release'|awk {'print $2'}} ${execi 86400 lsb_release -irc | grep 'Codename'|awk {'print $2'}}
+${font Ubuntu:size=12,weight:bold}${color5}${execi 86400 cat /etc/issue.net}
+
+${goto 163}${font conkycolors:size=8}k
+${goto 163}${font conkycolors:size=8}
+${goto 163}${font conkycolors:size=8}
+${goto 163}${font conkycolors:size=8}c
+${goto 163}${font conkycolors:size=8}
+${goto 163}${font conkycolors:size=8}B
+${goto 163}${font conkycolors:size=8}
+${goto 163}${font conkycolors:size=8}
+${goto 163}${font conkycolors:size=8}g
+
+${goto 163}${font conkycolors:size=8}e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+${color6}${font Open 24 Display St:size=20}Cpu ${color}${cpu}  ${alignr}${color6}Mem ${color}${memperc}
+

@@ -1,0 +1,160 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : http://sen7.deviantart.com/art/Conky-NightDrive-151418309
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 350
+gap_y 60
+minimum_size 1050 10
+maximum_width 1500
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 0
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 102
+own_window_argb_visual no
+
+#own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+#own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont DejaVu Sans:size=6
+xftalpha 0.9
+###End Font###
+
+
+###Colors###
+default_shade_color 101010
+default_color 8F8F8F
+
+# Blue
+#color1 71A1DF
+#color2 2C3949
+#color3 6F99B4
+#lua_load ~/.conky/Aurora/nightdrive/scripts/rings_blue.lua
+
+# Green
+#color1 AAB364
+#color2 2F312E
+#color3 628747
+#lua_load ~/.conky/Aurora/nightdrive/scripts/rings_green.lua
+
+# Orange
+#color1 DAB152
+#color2 2E2B22
+#color3 B28435
+#lua_load ~/.conky/Aurora/nightdrive/scripts/rings_orange.lua
+
+# Red
+color1 EE6363
+color2 3B2A2A
+color3 AE4747
+lua_load ~/.conky/Aurora/nightdrive/scripts/rings_red.lua
+
+# Mono
+#color1 8F8F8F
+#color2 303030
+#color3 555555
+#lua_load ~/.conky/Aurora/nightdrive/scripts/rings_mono.lua
+
+
+lua_draw_hook_pre ring_stats
+
+# +++++ Clock +++++
+template1 ${goto 28}${voffset 35}${color2}${font Digital Readout Thick Upright:size=40}00${voffset -9}:${voffset 9}00${goto 28}${color1}${time %k}${voffset -9}:${voffset 9}${time %M}\n${goto 130}${voffset -68}${color2}${font Digital Readout Thick Upright:size=24}00${goto 130}${color1}${time %d}\n${font Digital Readout Thick Upright:size=12}${goto 130}${voffset -18}${color2}00${goto 130}${color1}${time %m}${goto 146}${color2}00${goto 146}${color1}${time %y}${font}\n
+
+
+# +++++ Weather +++++
+
+
+# +++++ CPU +++++
+template3 ${image ~/.conky/Aurora/nightdrive/images/icons/red/cpu.png -p 278,47 -s 24x24 -f 86400}${goto 275}${voffset -49}${font}${color}${execi 10 sensors | grep 'Core 0' | awk {'print $3'}}${goto 275}${voffset 45}${font}${freq_g 1}GHz\n
+
+
+# +++++ Memory +++++
+template4 ${image ~/.conky/Aurora/nightdrive/images/icons/red/mem.png -p 358,48 -s 24x24 -f 86400}${goto 360}${voffset -49}${mem}${goto 360}${voffset 40}${swap}\n
+
+
+# +++++ Nvidia +++++
+template5 ${image ~/.conky/Aurora/nightdrive/images/icons/red/nvidia.png -p 437,49 -s 24x24 -f 86400}${goto 440}${voffset -55}${execi 60 nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader}°C\n${goto 430}${voffset 35}${execi 60 nvidia-settings -q all| grep -m 1 GPUCurrentProcessorClockFreqs | awk '{print $4}' | sed 's/.$//'} MHz\n
+
+
+# +++++ Sys & Network +++++
+template6 ${image ~/.conky/Aurora/nightdrive/images/icons/red/arch.png -p 515,33 -s 32x32 -f 86400}${goto 510}${voffset -18}${color3}${font}${execi 3600 aptitude search "~U" | wc -l | tail}${color} updates\n${goto 490}${voffset }${image ~/.conky/Aurora/nightdrive/images/icons/red/net.png -p 598,48 -s 24x24 -f 86400}${goto 605}${voffset -48}${downspeed}\n${goto 605}${voffset 40}${upspeed}\n
+
+
+# +++++ Storage +++++
+template7 ${image ~/.conky/Aurora/nightdrive/images/icons/red/hdd.png -p 678,48 -s 24x24 -f 86400}${goto 680}${voffset -60}${fs_free /}\n${goto 680}${voffset 40}${fs_free /home}\n
+
+# +++++ SPOTIFY +++++
+template8 ${goto 900}${voffset -50}${execi 5 echo `dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 2 "album"|egrep -v "album"|egrep -v "array"|cut -b 44-|cut -d '"' -f 1|egrep -v ^$`}
+template9 ${goto 900}${voffset 20}${execi 5 echo `dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata'|egrep -A 2 "artist"|egrep -v "artist"|egrep -v "array"|cut -b 27-|cut -d '"' -f 1|egrep -v ^$`}
+
+
+
+
+own_window_argb_value 102
+own_window_argb_visual no
+own_window_colour 000000
+TEXT
+${image ~/.conky/Aurora/nightdrive/images/bg.png -s 1060x120 -f 86400}${template1}${template3}${template4}${template5}${template6}${template7}${template8}${template9}
+${if_running spotify}
+${execi 5 $HOME/.conky/Aurora/scripts/spotify-api/cover_l.sh}
+${image ~/.conky/Aurora/scripts/spotify-api/lastpic_l -p 828,37 -s 48x48 -f 2}
+${image ~/.conky/Aurora/nightdrive/images/cover/cover_overlay.png -p 821,35 -s 58x52 -f 86400}
+${else}${goto 50}${image ~/.conky/Aurora/nightdrive/images/cover/cover_bg.png -p 821,35 -s 58x52 -f 86400}${image ~/.conky/Aurora/nightdrive/images/cover/cover_overlay.png -p 821,35 -s 58x52 -f 86400}${endif}
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=12817504&u=c" -o $HOME/.conky/Aurora/nightdrive/images/cache/weather.xml}${execi 300 cp -f $HOME/.conky/Aurora/nightdrive/images/outliner/$(grep "yweather:condition" $HOME/.conky/Aurora/nightdrive/images/cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png $HOME/.conky/Aurora/nightdrive/images/cache/weather-1.png}${image $HOME/.conky/Aurora/nightdrive/images/cache/weather-1.png -p 185,35 -s 50x50}

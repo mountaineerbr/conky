@@ -1,0 +1,122 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+# By Jesse_Avalos , See me on Eye Candy Linux_  on Google +
+# http://speedracker.deviantart.com/art/System-Flair-conky-510939049
+# https://plus.google.com/u/0/+DanielDiRezze/posts
+# https://drive.google.com/file/d/0B2vTmt_3l0bgUlFSTl9Nd1FKYjQ/view
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 20
+gap_y 20
+minimum_size 600 400
+maximum_width 500
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 0
+own_window_argb_visual yes
+
+#own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+#own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+###End Color###
+
+###Loading lua script###
+lua_load abargraph.lua
+lua_draw_hook_pre main_bars
+###End Loading Lua###
+
+
+TEXT
+${goto 100}${voffset 10}${font ADELE:bold:size=21}${time %A, %d %B}
+${goto 110}${voffset 20}${font ADELE:light:size=60}${time %H:%M}${image line.png -p 354,23 -s 3x189}
+${offset 370}${voffset -170}${font ADELE:bold:size=16}${exec cat /etc/lsb-release|grep ID|cut -d= -f2}  ${font ADELE:size=8}${execi 600 uname -r | cut -c 1-6 }
+${image thero.png -p 365,45 -s 25x25}${offset 400}${voffset 10}${font ADELE:size=14}${execi 10 sensors | grep 'Core 0' | awk {'print $3'}}C
+${image Chip.png -p 365,105 -s 25x25}${offset 400}${voffset 10} #${cpu cpu0}% / 100%
+${image mirco.png -p 365,134 -s 25x25}${offset 400}${voffset 10} #$mem / $memmax${font ADELE:size=14}
+${image up.png -p 368,163 -s 20x20}${offset 400}${voffset 10} #${upspeed eth0} kb/s / ${totalup eth0}
+${image dwn.png -p 368,192 -s 20x20}${offset 400}${voffset 10} #${downspeed eth0} kb/s / ${totaldown eth0}
+############################################
+# --- Location name (city and country) --- #
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=12817504&u=c" -o ~/.cache/weather.xml}
+\
+${font ADELE:bold:size=12}${goto 100}${voffset -90}${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "city=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}, ${execi 300 grep "yweather:location" ~/.cache/weather.xml | grep -o "country=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+#---High & Low Temperatures---#############
+${font ADELE:bold:size=10}
+${voffset -30}${goto 270}${execi 300 grep "yweather:condition" ~/.cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}° Celsius 
+${goto 105}${voffset 140}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}° | ${voffset }${goto 137}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2'}°\
+${goto 190}${voffset -1}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}° | ${voffset }${goto 222}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3'}°\
+${goto 280}${voffset -1}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4'}° | ${voffset }${goto 312}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4'}°\
+#---Name of the day---#####################
+${font ADELE:bold:size=10}\
+${goto 106}${voffset -65}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2' | tr '[a-z]' '[A-Z]'}${goto 199}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3' | tr '[a-z]' '[A-Z]'}${goto 285}${execi 300 grep "yweather:forecast" ~/.cache/weather.xml | grep -o "day=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4' | tr '[a-z]' '[A-Z]'}\
+####Weather Icons#########################
+#${execi 300 cp -f  ~/.conky/Aurora/SystemFlair/weather-icons/$(grep "yweather:condition" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 25,165 -s 40x40}
+${execi 300 cp -f  ~/.conky/Aurora/SystemFlair/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==2').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 100,155 -s 34x34}
+${execi 300 cp -f  ~/.conky/Aurora/SystemFlair/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==3').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 190,155 -s 34x34}
+${execi 300 cp -f  ~/.conky/Aurora/SystemFlair/weather-icons/$(grep "yweather:forecast" ~/.cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==4').png ~/.cache/weather-4.png}${image ~/.cache/weather-4.png -p 280,155 -s 34x34}

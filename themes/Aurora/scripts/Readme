@@ -1,0 +1,4 @@
+Scripts in script folder need to have an execute bit. Either you do it manually or run 
+making_scripts_executable.sh in the scripts folder
+
+You can do that in the terminal via chmod u+x making_scripts_executable.sh or via the gui and right-click and look for the possibility to make it a program or executing program.

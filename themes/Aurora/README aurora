@@ -1,0 +1,391 @@
+#==============================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/category/linux/aurora-conky/
+# 
+#==============================================================================
+
+The reading starts in the file START READING HERE (but welcome anyway)
+
+--------------------------------------------------------------------------------------
+
+Aurora Project for conky
+
+-------------------------
+
+Purpose 1 : Learn about conky, linux and my machines (Linux Mint and Ubuntu)
+
+Purpose 2 : Automate the proces so that most of the scripts will on any computer
+
+Purpose 3 : Teach about what i learn on http://erikdubois.be - article and 4 youtube movies
+
+Purpose 4 :
+
+Aurora theme is intended for a dual screen monitor. It has been designed on an a Samsung monitor 1680x1050 times two.
+Right side gives an Conky overview of widgets and the left side is where you work. 
+Left side has now also the netstat for port investigation as well as a test area where you can copy/paste code from the internet in.
+
+Purpose 5 : Have fun. Explore the linux world.
+
+Purpose 6 : Gather interesting conky's and incorporate them in one theme. To be activated at your will and learn how to do that in the process. Where possible the resource of conky will be added. I do not want to claim the work and creativity of third parties. I just want to learn.
+
+
+--------------------------------------------------------------------------------------
+GO ON READING IN THE FILE "INSTALLATION_AURORA_EXPLAINED"
+--------------------------------------------------------------------------------------
+
+
+
+--------------------------------------------------------------------------------------
+VERSION CHANGES
+--------------------------------------------------------------------------------------
+Version 3.0.3
+added ubuntu wily script 15.10
+got rid of pre_exec does not seem to work here
+instead used execi 60000
+
+
+Version 3.0.2
+Antergos script added when working on antergos gnome
+Archlinux script adapted
+
+
+Version 3.0.1
+a new year and a new Linux Mint 17.3 Rosa and a new numbering
+checking everything still works
+
+Version 2.9.4
+added cpu history line to ALLINONE
+
+Version 2.9.3
+NEW conky ALLINONE
+added a clean white conky originally from https://plus.google.com/u/0/+RobertPartridge and changed by https://plus.google.com/u/0/+ThomasThompson and now changed by me... 
+This is going to become the first conky I will activate to see the information of a new distro.
+
+Version 2.9.2
+added slick conky from Jesse Avalos - made changes do add cpu, temp, kernel and distro.
+changed dimensions and positions - can go in the top right corner of secondary screen
+
+Version 2.9.1
+added kernel and distro name in some of the conkies
+
+Version 2.9
+Found wrong reference in SystemFlair - icons where wrong
+
+Version 2.8.9
+Aurora system flair added from Jesse Avalos and Daniel Di Rezze - ommitted first bars acpitemp does not exist on my computers
+added temperature, added kernel
+
+Version 2.8.8
+Added harddisks to the side thin white (new conky added _extra at the end)
+
+Version 2.8.7
+Autoscript has no more if clausule to check uname for "ubuntu"
+when upgrading to a personal kernel it will not work
+users has to know whether they have an ubuntu based OS or not.
+
+Version 2.8.6
+Snowy Conky from Bhart Chauhan was a nice clean conky too good to pass up.
+Incorporated in the aurora theme
+
+Version 2.8.5
+minor changes to octupi clock centered, cpu cores more up so cpu cores (two cores) and spotify songs are 
+not overlapping.
+
+Version 2.8.3-4
+administration changes
+
+Version 2.8.2
+Octupi adaptation - new leg for temperature of cpu
+smaller lay-out changes on aurora_ds_3day forecast
+NEW widget from speedracker aka Jesse_Avalos side_thin - minor adjustments
+
+
+Version 2.8.1
+Gmail lua script no long funtional (temporary?)
+at the moment script from Aurora/scripts/gmail/gmail.py available
+but made extra bash script in Aurora/octupi/gmail.sh
+typ your login and password in that file 
+this bash file is now working
+
+Version 2.8
+NEW widget Octupi - sources see document
+all in lua written
+Added spotify leg and song and artist name
+alignment of data
+root has become home
+
+
+Version 2.7.5
+test of autoscript linux mint on new computer - one line that was ment for ubuntu is now deleted - no negative impact - smartcontrol does not exist on linux mint
+everything works like a charm
+NEW widget battery work in progress...
+
+Version 2.7.4
+NEW widget to get rss feeds this time via python
+arguments are given in conky (rssurl)
+
+Version 2.7.3
+two new color shemes for the general all in one
+montana and astronaut
+NEW widget taskbar dark in the style of linux mint 17.1 cinnamon for the right screen if you have a dual screen
+
+Version 2.7.2
+some of the widgets have only eth0
+added the if else code for wlan0 to show up and eth0 to disappear
+
+Version 2.7.1
+found out that there was such thing as pre_exec
+pre_exec = Executes a shell command one time before conky displays anything and puts output as text.
+Changed some of the code in general. No difference in cpu usage afterwards
+NEW widget - added dropbox script in the repertoire. Tells what is happening, syncing and up to date - nothing fancy but effective as check
+
+Version 2.7
+NEW widget computerlove (three colours)
+NEW widget frozen cherry
+
+Version 2.6.8 - 9
+minor typo and version numbering errors
+
+Version 2.6.7
+eliminated two scripts to change information for migrating to Ubuntu and back to linux mint
+Too many different widgets make that now impossible
+Uncomment the code at your own approval in the conky file if needed. Most important is the choice of 
+own_window_type. 
+You can use here several options. 
+all options for own_window_type are normal, desktop, dock, panel or override
+To be found at http://conky.sourceforge.net/
+
+ersion 2.6.6
+NEW widgets reloj added - code rewritten
+NEW widget orbs - code rewritten - beautifull transparent orbs - thanks to the designer
+lagadesk.deviantart.com
+NEW widget 3day box from speedracker - new design and reordered the coding
+
+Also cleaned a bit up - everything redundant is gone. No widget are gone. Wallpapers haven been minimised.
+All in all 8Mb less.
+
+Version 2.6.5
+NEW widget top bar - all information in two lines
+
+Version 2.6.4
+widget forecast had no more images folder... fixed that
+all widget start off from top with 40 pixels - this to be compatible with Ubuntu 14.10 were
+i worked on the last week. Awesome distro.
+made two more scripts to run when you switch like i do from Linux Mint to Ubuntu and vice versa
+look at Ubuntu always visible - it changes the code that makes it work in Linux mint but not in Ubuntu
+or
+look at Linux mint always visible - it changes the code that makes it work in Ubuntu but not in linux mint
+See it to understand it...
+
+NEW widget : Nightdrive (source added)
+NEW widget : vnstat - daemon to see how much you have uploaded and downloaded
+NEW widget : satelite pictures from europe going dark at the moment - lights coming up - clouds
+
+Version 2.6.3
+creation of a new wallpaper with gimp and inkscape not from scratch looking for
+logo's of Debian, Ubuntu and Linux mint. Minor changes to get same look.
+New widget - target is serinity and nice clock in the middle of the ubuntu logo.
+
+NEW widget : The big three
+
+
+Version 2.6.2
+Autoinstallation file retested - now one for Ubuntu Utopic 14.10 and one for Linux mint 17.1 Rebecca cinnamon
+Both systems tested
+
+Version 2.6.1
+check autoinstallation file - fonts were not properly addressed
+fixed this issue - fonts will go to ~/.fonts and cache is rebuild
+fixing of weather widget in infinity theme (pixelwise)
+
+Version 2.6
+fixed issue with spotify cover - variable export did not work
+theme infinity - cover also possible as globe
+
+Version 2.5.9
+New iconset added to wunderground widget
+Error found in Flair Weather - weather icon did not change - wrong path
+calendar a somewhat better lay-out more centered
+Complete new look in one widget based on the work and ideas of others. A bit of Inkscape and Gimp
+and a infinity theme is reinvented. Extra forecast and spotify.
+
+NEW widget : infinity (source added)
+
+Version 2.5.8
+forecast widget better lay-out more centered
+
+
+Version 2.5.7
+breaking bad theme with wallpaper - gimp files on google drive
+cleaing up of redundant files - reorganizing of folders
+header in conky files the same format
+
+Version 2.5.6
+added a beautiful conky from http://la-manoue.deviantart.com/art/Conky-Dark-373706858
+I have always liked this one. Took some work to integrate it. Now it will work out of the box.
+Use a dark background or use my new theme rings_lover.
+
+Version 2.5.5
+theme's deleted and added - changed configuration of widgets in theme
+made new theme all in one including spotify cover
+
+Version 2.5.3
+General corrections and alignments
+
+Version 2.5. -2.5.2
+new rings for widget general
+spotify smooth has 3 different dimensions
+general clean has an spotify cover now
+general just rings has some icons and rearranging of rings wlan and eth
+
+Version 2.4.9
+added spotify cover via api spotify
+three different sizes defined by spotify are possible
+you can resize them in conky with the option "-s 640x640"
+
+Version 2.4.8
+Made screenshots for all extra widgets
+added script to autoinstall fonts and refresh font cache - fonts go to ~/.fonts
+added min_clock and a theme to activate it
+two scripts added one for version control and other to change specific codes in all aurora config
+files - you can reuse these too
+added system flair as widget
+
+
+Version 2.4.7
+added new widget clock with rings
+added new lua to dram rings for Overview widget
+added the beautiful Flair Weather to the widgets
+http://itsfoss.com/weather-conky-linux/#more-6205
+added code so that widgets are no longer minimized when show desktop icon is used
+smooth info widget added from Jesse_Avalos and http://speedracker.deviantart.com
+https://plus.google.com/110188656318786850894/posts
+
+Version 2.4.6
+testing this version of aurora - making youtube movies
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+Explanation in English for all to understand
+
+
+Version 2.4.5
+every file gets date and version - script for changing them all - renaming some of the files
+autoscript changed - no chmod for scripts anymore
+
+
+Version 2.4.4
+cpu and mem in general have colors if they exceed a number
+correct wrong reference in network
+wireless lan gets color if quality is less than x (number)
+
+Version 2.4.3
+network ports - added better readability to widget - netstat
+network - port and program you are connected with to the internet - netstat
+sensors better layout for ease of reading
+
+Version 2.4.2
+Windows made smaller 4 windows able to fit on one screen
+2 not used windows for future development
+alignment is on the pixel perfect
+exec command evaluated where to lower it so to spare cpu time
+
+
+Version 2.4.1
+General - battery included for portables - not seen in desktop computers
+Network - wireless included for portables - not seen in desktop computers
+
+WEATHER script of  incorporated in Aurora theme - api from wunderground.com
+USE YOUR PERSONAL API instead of mine!!
+Two new widgets : one is vertical - simple and is horizontal (more elaborated)
+http://crunchbang.org/forums/viewtopic.php?id=19235
+
+
+Version 2.3.11
+sensors and sensors-detect explained in INSTALL
+harddisk change of code to make it more universal
+changed places in network widget - speed and totals
+new widget sensors that shows all your sensors for cpu, fan etc... relies on sensors and sensors-detect
+File general - looking for better grep script to read out fan and temp for all pc's
+xl transmission widget based on bash script - changes color for downloading, uploading, idle ...
+added text in xltransmission - allow remote access in transmission
+added icons google now for weather forcast - all icons go in cache folder
+use of dbus in spotify small widget - no script to get title and name
+
+
+Version 2.3.10
+
+Harddisk file - extra explanations what to do to make it work
+new screenshots of the aurora theme
+added amount in GiB on harddisk widget
+some code cleaning and rearranging
+calendar day - weekday starting on Monday now - switch M - same font Ubuntu
+forecast - design changes
+Clock rearranged - added inspira font in fonts folder.
+
+
+Version 2.3.9
+Boot.log reported a fail i.e. Starting SMB/CIFS File and Active Directory Server
+Solution is nderneath : NOT INCORPORATED - People with a stand alone pc can add this in the terminal
+It is a service that is started at boot that looks for an Active Directory (enterprises).
+Read more at : http://askubuntu.com/questions/455418/samba-started-twice-on-boot-up-after-upgrade-to-14-04
+
+copy this in terminal : 		echo manual | sudo tee /etc/init/samba-ad-dc.override
+
+Pix folder is gone - opted to go with fonts - I suspect loading fonts is lower on cpu and memory than pictures...
+
+Version 2.3.8
+Alignment of all widgets - uniformity
+
+Version 2.3.7
+rss feed added + extra script
+Systemlog added
+added icons from http://genericons.com/ and conkycolors fromhttp://helmuthdu.deviantart.com/art/CONKY-COLORS-244793180
+
+
+
+Version 2.3.6
+automatic execute bit added for the different scripts like spotify scripts
+error corrected in sda reference
+
+
+Version 2.3.5
+Complete rewrite of the manual 
+readme, start reading here, install and autoscript
+
+Version 2.3.4
+Streamlining and testing
+
+
+Version 2.3.3
+transmission widget 
+actual torrent can be monitored on the screen. If no downloads then an nice icon.
+
+
+Version 2.3.2 
+Lay-out 
+
+
+Version 2.3.1
+File permissions were wrong
+spotify window bigger for longer artist titles
+updates in color in general
+Extra harddisk is not visible if not mounted in harddisk
+new message how many gmail mails are unread
+
+Version 2.2
+aligning and smaller windows
+forecast more aligned
+
+Version 2.1
+Spotify support
+https://gist.github.com/red-noise/9789642/download#
+
+Version 2.0
+Kick off version
+
+
+
+

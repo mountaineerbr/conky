@@ -1,0 +1,111 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : http://votritis.deviantart.com/art/Reloj-Conky-208415121
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 50
+gap_y 70
+minimum_size 200 100
+maximum_width 600
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_value 102
+own_window_argb_visual no
+
+#own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type override
+own_window_transparent yes
+#own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer right
+use_xft yes
+xftfont ubuntu:size=12
+xftalpha 1
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+#Red#
+color7 FF0000
+###End Color###
+
+###Loading lua script###
+###Choose the correct file according to the number of your cores###
+###End Loading Lua###
+
+#hour=3600
+#day=86400
+
+TEXT
+${offset 475}${voffset 10}${font OldSansBlack:size=22}${color #232323}${time %I}${offset 13}${time %M}${font}
+${font pftempestafivecondensed:size=6}${color}${offset 0}${voffset -43}\
+${goto 80}Signal: ${goto 125}${wireless_link_qual wlan0}${goto 135}%${goto 195}CPU:${top cpu 1}${goto 250}%${goto 310}HOME:${goto 340}${fs_used /home}${goto 420}Cpu:${goto 445}$cpu%${goto 460}${hwmon 0 temp 1}°C 
+${goto 80}IP:${goto 90}${addr eth0}${goto 135}%${goto 195}${top name 1}${goto 310}ROOT:${goto 340}${fs_used /root}${goto 420}Core:${goto 450}${freq_g (1)}GHz 
+${goto 80}Ul:${goto 100}${upspeed wlan0}${goto 195}MEM:${top_mem mem 1}%${goto 310}FREE:${goto 340}${fs_free /home}${goto 420}MEM:${goto 450}${mem}
+${goto 80}Dl:${goto 100}${downspeed wlan0}${goto 195}${top_mem name 1}${goto 310}SWAP:${goto 340}${swap}${goto 420}Batt:${goto 450}${battery_percent BAT0}%
+${image ~/.conky/Aurora/images/reloj/reloj_bar/relojbarconky.png  575x63 -p 0,0}

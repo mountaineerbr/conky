@@ -1,0 +1,155 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source
+# By Jesse_Avalos , See me on Eye Candy Linux_  on Google +
+# http://speedracker.deviantart.com/art/Flair-Weather-Conky-Made-for-Conky-Manager-510130311
+# More documentation of how to 
+# http://itsfoss.com/weather-conky-linux
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 10
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 10
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 250
+gap_y 70
+minimum_size 0 0
+maximum_width 660
+###End Position###
+
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual yes
+own_window_argb_value 0
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont ubuntu:size=14
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+###End Color###
+
+TEXT
+${goto 90}${font adele:bold:size=25} Today
+${goto 90}${font LG Weather_Z:size=90}${time %I:%M}${image $HOME/.conky/Aurora/images/flair_weather/line.png -p 354,23 -s 3x150}
+${offset 370}${voffset -136}${font ADELE:size=22}${time %A, %d %B}
+\
+# --- Weather --- #
+###################
+\
+# --- WOEID (Location id) --- #
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=12817504&u=c" -o $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml}\
+\
+# --- Temperature --- #
+#######################
+\
+${font ADELE :size=30}${offset 375}${voffset 10}${execi 300 grep "yweather:condition" $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml | grep -o "temp=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}°${font ADELE :size=15}C${font ADELE :size=30}${voffset -20}  |
+\
+# --- Weather icon --- #
+########################
+\
+${execi 300 cp -f $HOME/.conky/Aurora/images/flair_weather/outlineW/$(grep "yweather:condition" $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml | grep -o "code=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*").png $HOME/.conky/Aurora/images/flair_weather/cache/weather-1.png}${image $HOME/.conky/Aurora/images/flair_weather/cache/weather-1.png -p 420,8 -s 80x80}
+\
+# --- Textual condition (e.g. Partly cloudy) --- #
+##################################################
+\
+${font Roboto Light:size=18}${offset 462}${voffset -78}${execi 300 grep "yweather:condition" $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml | grep -o "text=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+\
+# --- Icon - high temperature --- #
+###################################
+\
+${image $HOME/.conky/Aurora/images/flair_weather/arrow-up.png -p 375,184 -s 12x12}
+\
+# --- High temperature --- #
+############################
+\
+${font Roboto Light :size=12}${offset 395}${voffset -25}${execi 300 grep "yweather:forecast" $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml | grep -o "high=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+\
+# --- Icon - low temperature icon --- #
+#######################################
+\
+${image $HOME/.conky/Aurora/images/flair_weather/arrow-down.png -p 422,184 -s 12x12}
+\
+# --- Low temperature --- #
+###########################
+\
+${font Roboto Light :size=12}${offset 438}${voffset -44}${execi 300 grep "yweather:forecast" $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml | grep -o "low=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*" | awk 'NR==1'}°
+\
+# --- Icon - map marker --- #
+#############################
+\
+${image $HOME/.conky/Aurora/images/flair_weather/map-marker.png -p 463,180 -s 20x16}
+\
+# --- Location name (city and country) --- #
+############################################ 
+\
+${font Roboto Light :size=12}${offset 485}${voffset -45}${execi 300 grep "yweather:location" $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml | grep -o "city=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}, ${execi 300 grep "yweather:location" $HOME/.conky/Aurora/images/flair_weather/cache/weather.xml | grep -o "country=\"[^\"]*\"" | grep -o "\"[^\"]*\"" | grep -o "[^\"]*"}
+
+${goto 285}${voffset -80}${font adele:bold:size=25}${time %p}

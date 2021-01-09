@@ -1,0 +1,94 @@
+https://www.vivaolinux.com.br/topico/Linux-cientifico/Conky-esta-mostrando-alerta-do-kdialog-do-fan
+
+Sintaxe nova:
+
+
+${if_match ${execpi 15 sensors | grep RPM | grep -Eo '[0-9]{2,}'} < 1000} ${exec echo helOO} ${endif}
+
+${if_match ${execpi 10 sensors | grep RPM | grep -Eo '[0-9]{2,}'} < 1000} ${exec echo helaaaaaa} ${endif} 
+
+----------------------------
+Olá Henrique..
+
+Cara, quando eu falei para você procurar outros conkies, eu quis dizer
+procurar novos temas/modelos de conkies... E trabalhar com eles..
+Sim, existe versões diferentes do Conky (programa) e tal, mas não foi 
+bem  isso que quis dizer.. Testei o if_match com a sintaxe antiga
+do conky , mas mesmo assim não funcionou...
+
+Tenho a impressão que a saída do hwmon do conky dentro da declaração 
+de if_match não está tendo saída ou não está trabalhando direito dentro do
+if_match... E qq que seja o problema, o kdialog está sendo ativado...
+
+Até entrei com uma questão em um fórum internacional para ver o 
+por que a declaração de if_match do conky não está funcionando..
+Ninguém até agora..
+
+Mas daí fui procurar mais hoje e achei umas soluções!!
+Tudo vai depender se esse comando abaixo vai funcionar no seu sis-
+tema ou não.. Testa aí:
+[code]$ sensors | grep RPM | grep -Eo '[0-9]{2,}'[/code]
+Se este comando estiver retornando um valor numérico somente
+( RPM do fan), então podemos prosseguir...
+Do contrário, você pode tentar usar aquele comando do seu conky mesmo
+que utiliza o "sensors" e "awk" (para fazer um print do valor de RPM),
+ no lugar desse que passei, OK?! O importante é pegarmos o valor de RPM...
+
+Achei duas maneiras de fazer isso.
+
+A primeira:
+
+Naquela linha do conky com problemas, só deixe:
+[code]${color white}*CPU Fan:$color ${exec sensors | awk '/fan2/ { print $2 }'}rpm[/code]
+Para você receber o valor de rpm visualmente...
+( suponho que esteja te dando o valor numérico de rpm no seu sistema - no meu não funciona!)
+
+No final de "conky.text = [[ ... ]]" :
+[code]${execpi 10 if [[ $(sensors | grep RPM | grep -Eo "[0-9]{2,}") < 1000 ]]; then kdialog --title "Alerta do Conky" --msgbox "Rotação CPU Fan abaixo do normal"; fi}[/code]
+
+A segunda alternativa:
+Vamos criar um script primeiro, que conterá as condições de if.
+[code]#!/bin/bash
+#
+#Script de monitoramento FAN
+# Chamado pelo Conky
+
+if [[ $(sensors | grep RPM | grep -Eo '[0-9]{2,}') < 1000 ]];
+then
+	kdialog --title "Alerta do Conky" --msgbox "Rotação CPU Fan abaixo do normal"
+fi[/code]
+Escolha um nome pro script e salve ele em uma localização segura, pode ser
+junto com seus documentos, ou dentro da pasta de configuração do conky
+em ~/.conky ou na pasta de config dele em seu sistema..
+
+Agora, é importante fazer o script executável.
+Suponha que você salvou ele como "fanmonitor.sh"
+[code]$ chmod +x "~/.conky/fanmonitor.sh"[/code]
+
+Agora você poderá testar o script pelo terminal.
+
+É claro, ele não deve ativar nada se o RPM não estiver abaixo de 1000.
+Então, para fins de testes, volte o script e substitua o símbolo de < por >
+e veja se ele é ativado..
+Quando você tiver certeza que o script está funcionando de acordo,
+é hora de colocarmos o chamamento da execução do script no seu conky..
+
+Lá no texto do seu conky, pode retirar aquela parte que ativa o kdialog que dá
+ problemas/não funciona, e deixar só:
+${color white}*CPU Fan:$color ${exec sensors | awk '/fan2/ { print $2 }'}rpm
+para ele continuar te mostrando o valor de rpm..
+
+E colocar as linhas abaixo dentro de "conky.text = [[ ... ]]", pode ser no final pois ele não vai produzir
+output visível, só vai rodar no fundo o script de monitoramento...
+
+[code]${execpi 10 ~/.conky/fanmonitor.sh}[/code]
+
+O execp com a opção "i" ( de intervalo), vai executar a operação a cada 10 segundos..
+
+Refs:
+https://ubuntuforums.org/showthread.php?t=2357244
+https://ubuntuforums.org/showthread.php?t=1897047
+https://www.mankier.com/1/conky
+http://conky.sourceforge.net/config_settings.html
+http://www.ifxgroup.net/conky.htm
+

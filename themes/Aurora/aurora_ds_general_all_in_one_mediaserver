@@ -1,0 +1,144 @@
+#=====================================================================================
+#                               aurora
+# Date    : 26/06/2016
+# Author  : Erik Dubois at http://www.erikdubois.be
+# Version : v3.0.4
+# License : Distributed under the terms of GNU GPL version 2 or later
+# Documentation English: http://erikdubois.be/linux/install-conky-theme-aurora
+# Documentation Dutch: http://erikdubois.be/linux/conky
+#======================================================================================
+
+#======================================================================================
+#                               
+# Source : 
+#
+#======================================================================================
+
+###Settings###
+background yes
+cpu_avg_samples 1
+default_bar_size 200 10
+default_graph_size 200 100
+diskio_avg_samples 10
+double_buffer yes
+extra_newline no
+if_up_strictness address
+net_avg_samples 1
+no_buffers yes
+temperature_unit celsius
+text_buffer_size 2048
+short_units yes
+update_interval 1
+###End Settings###
+
+###Position###
+alignment top_right
+gap_x 10
+gap_y 40
+minimum_size 300 870
+maximum_width 300
+###End Position###
+
+###Borders###
+border_inner_margin 0
+border_outer_margin 10
+border_width 0
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+###End Borders###
+
+###Window###
+own_window yes
+own_window_argb_visual no
+own_window_argb_value 102
+own_window_class systemConky
+own_window_colour 000000
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+#all options for own_window_type are normal, desktop, dock, panel or override
+#best for Linux Mint 17.1 Cinnamon
+own_window_type desktop
+#best for Ubuntu 14.10 Utopic
+#own_window_type normal
+own_window_transparent yes
+own_window_title system_conky
+###End Window###
+
+###Font###
+max_text_width 0
+override_utf8_locale yes
+uppercase no
+use_spacer none
+use_xft yes
+xftfont Ubuntu :size=9
+xftalpha 0.9
+###End Font###
+
+###Defining Colors###
+default_color FFFFFF
+default_outline_color 000000
+default_shade_color 000000
+#Shades of Gray#
+color1 DDDDDD
+color2 AAAAAA
+color3 888888
+#Orange#
+color4 EF5A29
+#Green#
+color5 77B753
+#Light Orange#
+color6 FFA300
+#Red#
+color7 CE0000
+###End Color###
+
+###Loading lua script###
+
+###End Loading Lua###
+
+#hour=3600
+#day=86400
+
+TEXT
+${font Ubuntu :size=12,weight:bold}${color4}Overview${font Ubuntu:size=7,weight:bold}${voffset -8}${alignr}v3.0.4  ${font Ubuntu :size=12,weight:bold}${color0}${font ConkyColors:size=14}E          
+${hr 2}
+#{font Ubuntu :size=12,weight:bold}${color5}${execi 6000 lsb_release -irc | grep 'Distributor'|awk {'print $3'}} ${execi 86400 lsb_release -irc | grep 'Release'|awk {'print $2'}} ${execi 6000 lsb_release -irc | grep 'Codename'|awk {'print $2'}}
+${font Ubuntu :size=12,weight:bold}${color6}${execi 6000 cat /etc/issue.net}
+${voffset -5}${color5}${font Ubuntu:size=8,weight:italic}$sysname $kernel on $machine
+${font Ubuntu :size=12,weight:bold}${color5}Cpu Temp ${alignr}${color}${execi 60 sensors | grep 'Core 0' | awk {'print $3'}}
+${font Ubuntu :size=12,weight:bold}${color5}Gpu Temp  ${alignr}${if_match ${execi  10 sensors | grep temp1 |awk {'print $2'} | cut -c 2-3} > 70}${color7}${else}${color}$endif}${alignr}${execi  10 sensors | grep temp1 |awk {'print $2'}}
+#check sensors conky widget to see your sensor names and change these here
+${offset 10}${color4}${cpubar cpu0 10,150}${color4}${font Ubuntu :size=9,weight:bold} Cpu${alignr}${if_match ${cpu cpu0} > 70}${color7}${else}${if_match ${cpu cpu0} > 40}${color4}${else}${color}${endif}${endif}${font Ubuntu :size=9,weight:bold}${cpu cpu0}%   
+${offset 10}${color4}${membar 10,150}${font Ubuntu :size=9,weight:bold} Mem  ${alignr}${if_match ${memperc} > 60}${color6}${else}${color}${endif}${font Ubuntu :size=9,weight:bold}${memperc}%   
+${font Ubuntu :size=9,weight:bold}${color5}CPU Usage over Time
+${color}${cpugraph 40,300 77B753 EF5A29  -t }
+# Network Backup (my desktop have only LAN). ETHERNET ring is mostly useless but looks pretty, main info is in the graphs
+${if_existing /proc/net/route eth0}${font Ubuntu :size=9,weight:bold}${color5}Ethernet
+${offset 10}${color4}Total up${alignr}${color}${totalup eth0}
+${offset 10}${color4}Total down${alignr}${color}${totaldown eth0}
+${offset 10}${color4}${font Ubuntu :size=9,weight:bold}Upload speed ${alignr}${font Ubuntu :size=9,weight:bold}${color}${upspeed eth0}
+${upspeedgraph eth0 40,300 4B1B0C FF5C2B 10000000 -l -t}
+${offset 10}${color4}${font Ubuntu :size=9,weight:bold}Download speed ${alignr}${font Ubuntu :size=9,weight:bold}${color}${downspeed eth0}
+${downspeedgraph eth0 40,300 324D23 77B753 10000000 -l -t}
+${else}${font Ubuntu :size=9,weight:bold}${color5}Wireless
+${offset 10}${font Ubuntu:size=9,weight:bold}${color4}Total up${alignr}${color}${totalup wlan0}
+${offset 10}${font Ubuntu:size=9,weight:bold}${color4}Total down${alignr}${color}${totaldown wlan0}
+${offset 10}${font Ubuntu :size=9,weight:bold}${color4}Upload speed${alignr}${color}${upspeed wlan0}
+${offset 50}${upspeedgraph wlan0 10,250 FFFFFF FF5C2B 10000000 -l -t}
+${offset 10}${font Ubuntu:size=9,weight:bold}${color4}${font Ubuntu :size=9,weight:bold}Download speed ${alignr}${font Ubuntu :size=9,weight:bold}${color}${downspeed wlan0}
+${offset 50}${downspeedgraph wlan0 10,250 FFFFFF 77B753 10000000 -l -t}
+${endif}${color5}Disks
+${offset 10}${font Ubuntu:size=9,weight:bold}${color}Root${font Ubuntu:size=9,weight:bold}${color5}${goto 130}[${fs_size /}]
+${offset 10}${if_match ${fs_used_perc /} > 80}${color7}${else}${color4}${endif}${fs_bar 10,150 /} ${fs_used_perc /}%${color4}${alignr}Free: ${color0}${alignr}${fs_free /}
+${font Ubuntu:size=9,weight:bold}${offset 10}Home${font Ubuntu:size=9,weight:bold}${color5}${goto 130}[${fs_size /home}]
+${offset 10}${if_match ${fs_used_perc /home} > 80}${color7}${else}${color4}${endif}${fs_bar 10,150 /home} ${fs_used_perc /home}%${alignr}${color4}Free: ${color}${alignr}${fs_free /home}
+${offset 10}${color}Data    ${font Ubuntu:size=9,weight:bold}${color5}${goto 130}[${fs_size /media/erik/Data}]
+${offset 10}${if_match ${fs_used_perc /media/erik/Data} > 80}${color7}${else}${color4}${endif}${fs_bar 10,150 /media/erik/Data} ${fs_used_perc /media/erik/Data}%${color4}${alignr}Free: ${color0}${alignr}${fs_free /media/erik/Data}
+${offset 10}${color}Backup    ${font Ubuntu:size=9,weight:bold}${color5}${goto 130}[${fs_size /media/erik/Backup}]
+${offset 10}${if_match ${fs_used_perc /media/erik/Backup} > 80}${color7}${else}${color4}${endif}${fs_bar 10,150 /media/erik/Backup} ${fs_used_perc /media/erik/Backup}%${color4}${alignr}Free: ${color0}${alignr}${fs_free /media/erik/Backup}
+${color5}Disk activity
+${color}${diskiograph_write 20,300 324D23 77B753 100000 -t }${font Ubuntu :size=9,weight:bold}${if_match ${execi  10 sensors | grep temp1 |awk {'print $2'} | cut -c 2-3} > 70}${color7}${else}${color}$endif}GPU Temp ${alignr}${execi  10 sensors | grep temp1 |awk {'print $2'}}
+${font Ubuntu :size=12,weight:bold}${color5}Downloaded this month
+${font Ubuntu :size=9,weight:bold}${color}${execi 1000 vnstat | grep `date +%b`" '"`date +%y` | awk {'print $3,$4'}}
+
