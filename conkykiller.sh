@@ -1,5 +1,5 @@
 #!/bin/bash
-# v0.2.4  jan/2021  by mountaineerbr
+# v0.2.6  feb/2021  by mountaineerbr
 # restart conky regularly due to terrible memory leak with io ops
 
 # alternatives: systemd timer or cron jobs
@@ -27,6 +27,8 @@ LOGF="/tmp/conkykiller.sh.log"
 
 #script path
 SCRIPT_PATH="$0"
+#script name
+SCRIPT_NAME="${SCRIPT_PATH##*/}"
 
 
 #demonise this script
@@ -44,10 +46,10 @@ then
 fi
 
 #kill other instances of this script
-for pid in $( pidof -x "$SCRIPT_PATH" )
+for pid in $( pidof -x "$SCRIPT_NAME" )
 do
-	#either pid is own or send TERM signal
-	(( $pid == $$ )) || kill -15 "$pid"
+	#either pid is own or send SIGTERM
+	(( pid == $$ )) || kill -15 "$pid"
 done
 unset pid
 
@@ -67,7 +69,7 @@ do
 	done
 
 	#log
-	printf '%s: conky restart in %s hours (%s)\n' "${SCRIPT_PATH##*/}" "$RESTART" "$( date -Isec -d${RESTART}hours )"
+	printf '%s: conky restart in %s hours (%s)\n' "$SCRIPT_NAME" "$RESTART" "$( date -Isec -d${RESTART}hours )"
 
 	#sleep
 	sleep ${RESTART}h
