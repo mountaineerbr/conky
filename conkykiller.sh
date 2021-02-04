@@ -1,5 +1,5 @@
 #!/bin/bash
-# v0.2.8  feb/2021  by mountaineerbr
+# v0.3  feb/2021  by mountaineerbr
 # restart conky regularly due to terrible memory leak with io ops
 
 # alternatives: systemd timer or cron jobs
@@ -48,8 +48,7 @@ fi
 for pid in $( pidof -x "$SCRIPT_NAME" )
 do
 	#either pid is own or send SIGTERM
-	(( pid == $$ )) || kill -15 "$pid"
-	#pkill -15 -P "$pid"
+	(( pid == $$ )) || pkill -15 -P "$pid"
 done
 unset pid
 
