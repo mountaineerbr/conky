@@ -1,5 +1,5 @@
 #!/bin/bash
-# v0.2.6  feb/2021  by mountaineerbr
+# v0.2.8  feb/2021  by mountaineerbr
 # restart conky regularly due to terrible memory leak with io ops
 
 # alternatives: systemd timer or cron jobs
@@ -32,10 +32,9 @@ SCRIPT_NAME="${SCRIPT_PATH##*/}"
 
 
 #demonise this script
-if (( KDAEMON == 0 ))
+if (( CDAEMON == 0 ))
 then
-	KDAEMON=1
-	export KDAEMON
+	export CDAEMON=1
 
 	"$SCRIPT_PATH" &
 	
@@ -50,6 +49,7 @@ for pid in $( pidof -x "$SCRIPT_NAME" )
 do
 	#either pid is own or send SIGTERM
 	(( pid == $$ )) || kill -15 "$pid"
+	#pkill -15 -P "$pid"
 done
 unset pid
 
