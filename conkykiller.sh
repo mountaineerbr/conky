@@ -1,11 +1,10 @@
 #!/bin/bash
-# v0.3.2  feb/2021  by mountaineerbr
-# restart conky regularly due to terrible memory leak with io ops
+# Restart conky regularly due to terrible memory leak with io ops
+# v0.4.1  feb/2021  by mountaineerbr
 
-# alternatives: systemd timer or cron jobs
+# Alternatives: systemd timer, cron jobs
 # https://forums.freebsd.org/threads/is-conky-leaking-memory.24197/
 # https://unix.stackexchange.com/questions/213288/killing-the-previous-instances-of-a-script-before-running-the-same-unix-script
-
 
 #load user confs (conkies)
 CONFS=(
@@ -18,9 +17,10 @@ CONFS=(
 	"$HOME/.config/conky/confs/aurora_allinone.conf"
 )
 
-#restart every period of time
-#integer, hours
-RESTART=6
+#period of time to restart (integer)
+RESTART=4
+#unit of restart value (hour, min)
+RESTART_UNIT=hour
 
 #log file
 LOGF="/tmp/conkykiller.sh.log"
@@ -32,13 +32,13 @@ SCRIPT_NAME="${SCRIPT_PATH##*/}"
 
 
 #demonise this script
-if (( CDAEMON == 0 ))
+if ((CDAEMON==0))
 then
 	export CDAEMON=1
 
 	"$SCRIPT_PATH" &
 	
-	printf '%s: warning: forked to background -- %s\n\n' "${0##*/}" "$!" >&2
+	echo -e "$SCRIPT_NAME: warning: forked to background -- $!\n" >&2
 	disown
 	
 	exit 0
@@ -56,22 +56,25 @@ unset pid
 while true
 do
 	#kill conky
-	killall conky
+	killall conky && sleep 4
 	
 	#launch conkies
-	for conf in "${CONFS[@]}"
+	for c in "${CONFS[@]}"
 	do
-		#flag -d daemonises conky
-		#flag -c configuration file
-		conky -dc "$conf"  
-		sleep 1
+		conky --daemonize --pause=2 -X "${DISPLAY}" -c "$c" || break 2
+		#-d daemonises conky
+		#-c configuration file
+		#-p time to pause before actually starting conky
+		#--display X11 display to use
+		#sleep 2
 	done
 
 	#log
-	printf '%s: conky restart in %s hours (%s)\n' "$SCRIPT_NAME" "$RESTART" "$( date -Isec -d${RESTART}hours )"
+	echo -e "\n$SCRIPT_NAME: conky restart in ${RESTART}${RESTART_UNIT}s ($( date -Isec -d${RESTART}${RESTART_UNIT} ))"
 
 	#sleep
-	sleep ${RESTART}h
+	sleep ${RESTART}${RESTART_UNIT:0:1}
 
 done | tee -a "$LOGF" >&2
+#done  2>&1 | tee -a "$LOGF" >&2
 
