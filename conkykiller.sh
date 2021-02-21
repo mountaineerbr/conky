@@ -1,7 +1,7 @@
 #!/bin/bash
 # Restart conky regularly due to terrible memory leak with io ops
 # `xscreensaver' may interfere with restarting conky properly
-# v0.4.2  feb/2021  by mountaineerbr
+# v0.4.3  feb/2021  by mountaineerbr
 
 # Alternatives: systemd timer, cron jobs
 # https://forums.freebsd.org/threads/is-conky-leaking-memory.24197/
@@ -53,7 +53,7 @@ while true
 do
 	#check if `xscreensaver' has blanked the screen
 	while xscreensaver-command -time | grep -Fqi 'screen blanked'
-	do sleep 6
+	do sleep 10
 	done
 
 	#kill conky
