@@ -1,6 +1,7 @@
 #!/bin/bash
 # Restart conky regularly due to terrible memory leak with io ops
-# v0.4.1  feb/2021  by mountaineerbr
+# `xscreensaver' may interfere with restarting conky properly
+# v0.4.2  feb/2021  by mountaineerbr
 
 # Alternatives: systemd timer, cron jobs
 # https://forums.freebsd.org/threads/is-conky-leaking-memory.24197/
@@ -17,8 +18,8 @@ CONFS=(
 	"$HOME/.config/conky/confs/aurora_allinone.conf"
 )
 
-#period of time to restart (integer)
-RESTART=4
+#period of time between restarts
+RESTART=6
 #unit of restart value (hour, min)
 RESTART_UNIT=hour
 
@@ -35,41 +36,39 @@ SCRIPT_NAME="${SCRIPT_PATH##*/}"
 if ((CDAEMON==0))
 then
 	export CDAEMON=1
-
-	"$SCRIPT_PATH" &
-	
-	echo -e "$SCRIPT_NAME: warning: forked to background -- $!\n" >&2
-	disown
-	
-	exit 0
+	"$SCRIPT_PATH" & disown
+	echo -e "$SCRIPT_NAME: warning: fork to background -- $!\n" >&2
+	exit
 fi
 
 #kill other instances of this script
+#either pid is own or send SIGTERM
 for pid in $( pidof -x "$SCRIPT_NAME" )
-do
-	#either pid is own or send SIGTERM
-	(( pid == $$ )) || pkill -P "$pid"
+do (( pid == $$ )) || pkill -P "$pid"
 done
 unset pid
 
 #kill and restart loop
 while true
 do
+	#check if `xscreensaver' has blanked the screen
+	while xscreensaver-command -time | grep -Fqi 'screen blanked'
+	do sleep 6
+	done
+
 	#kill conky
-	killall conky && sleep 4
+	killall conky && sleep 2
 	
 	#launch conkies
 	for c in "${CONFS[@]}"
-	do
-		conky --daemonize --pause=2 -X "${DISPLAY}" -c "$c" || break 2
-		#-d daemonises conky
-		#-c configuration file
-		#-p time to pause before actually starting conky
-		#--display X11 display to use
-		#sleep 2
+	do conky --daemonize --pause=2 -X "${DISPLAY}" -c "$c" || break 2
 	done
+	#-d daemonises conky
+	#-c configuration file
+	#-p time to pause before actually starting conky
+	#--display X11 display to use
 
-	#log
+	#feedback
 	echo -e "\n$SCRIPT_NAME: conky restart in ${RESTART}${RESTART_UNIT}s ($( date -Isec -d${RESTART}${RESTART_UNIT} ))"
 
 	#sleep
